@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonus Esclusivo</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #050510;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* Premium animated background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background: #050510;
+            overflow: hidden;
+        }
+        
+        /* Gradient orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .orb1 {
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, #f59e0b 0%, transparent 70%);
+            top: -300px;
+            left: -200px;
+            animation-duration: 25s;
+        }
+        
+        .orb2 {
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, #dc2626 0%, transparent 70%);
+            bottom: -400px;
+            right: -300px;
+            animation-duration: 30s;
+            animation-delay: -10s;
+        }
+        
+        .orb3 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #fbbf24 0%, transparent 70%);
+            top: 40%;
+            left: 60%;
+            animation-duration: 35s;
+            animation-delay: -15s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+        
+        /* Grid overlay */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: grid-move 15s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+        
+        /* Particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fbbf24;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particle-float 10s infinite linear;
+        }
+        
+        @keyframes particle-float {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+        }
+        
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 6s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 7s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 8s; }
+        .particle:nth-child(10) { left: 95%; animation-delay: 9s; }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .bonus-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc2626, #f59e0b);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.5);
+            animation: pulse-badge 2s infinite;
+        }
+        
+        @keyframes pulse-badge {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(220, 38, 38, 0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 40px rgba(220, 38, 38, 0.7);
+            }
+        }
+        
+        .main-title {
+            font-size: clamp(48px, 8vw, 84px);
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 60px rgba(251, 191, 36, 0.5);
+            letter-spacing: 2px;
+            line-height: 0.9;
+            position: relative;
+        }
+        
+        .main-title::after {
+            content: '🎁';
+            position: absolute;
+            top: -40px;
+            right: 50%;
+            transform: translateX(50%);
+            font-size: 60px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(50%) translateY(0); }
+            50% { transform: translateX(50%) translateY(-10px); }
+        }
+        
+        .subtitle {
+            font-size: clamp(20px, 3vw, 28px);
+            line-height: 1.6;
+            color: #e2e8f0;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        .subtitle strong {
+            color: #fbbf24;
+            font-weight: 700;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Video Section */
+        .video-section {
+            margin-bottom: 60px;
+            animation: scaleIn 0.8s ease-out 0.5s both;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .video-container {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 120px rgba(251, 191, 36, 0.2);
+            overflow: hidden;
+        }
+        
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #dc2626, #fbbf24);
+            background-size: 400% 400%;
+            border-radius: 30px;
+            opacity: 0.6;
+            z-index: -1;
+            animation: gradient-rotate 10s ease infinite;
+        }
+        
+        @keyframes gradient-rotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        #vidalytics_embed_uboZd_PuTWyQaU7D {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+        
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(251, 191, 36, 0.1) 0%, transparent 70%);
+        }
+        
+        .video-text {
+            color: #fbbf24;
+            font-size: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 60px;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .cta-text {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+        }
+        
+        .arrow-down {
+            display: block;
+            margin: 15px auto;
+            font-size: 40px;
+            animation: arrow-bounce 1.5s infinite;
+            color: #fbbf24;
+        }
+        
+        @keyframes arrow-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        
+        /* Broker Section - PuPrime Style */
+        .broker-section-puprime {
+            margin-top: 20px;
+            padding: 50px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 153, 204, 0.1));
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            border-radius: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 212, 255, 0.4);
+        }
+        
+        .broker-section-puprime::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* PuPrime Button */
+        .puprime-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            color: white;
+            padding: 22px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: pulse-broker 2s infinite;
+        }
+        
+        @keyframes pulse-broker {
+            0% {
+                box-shadow: 0 20px 50px rgba(0, 212, 255, 0.6);
+            }
+            50% {
+                box-shadow: 0 25px 60px rgba(0, 212, 255, 0.8), 0 0 100px rgba(0, 212, 255, 0.4);
+            }
+            100% {
+                box-shadow: 0 20px 50px rgba(0, 212, 255, 0.6);
+            }
+        }
+        
+        .puprime-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .puprime-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 70px rgba(0, 212, 255, 0.8), 0 0 120px rgba(0, 212, 255, 0.5);
+        }
+        
+        .puprime-button:hover::before {
+            left: 100%;
+        }
+        
+        .broker-icon {
+            width: 32px;
+            height: 32px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .bonus-badge {
+                font-size: 12px;
+                padding: 8px 20px;
+            }
+            
+            .main-title {
+                font-size: 42px;
+                margin-bottom: 25px;
+            }
+            
+            .main-title::after {
+                font-size: 40px;
+                top: -30px;
+            }
+            
+            .subtitle {
+                font-size: 20px;
+                margin-bottom: 40px;
+            }
+            
+            .video-container {
+                padding: 20px;
+            }
+            
+            .video-text {
+                font-size: 16px;
+            }
+            
+            .cta-text {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+            
+            .arrow-down {
+                margin: 10px auto;
+                font-size: 30px;
+            }
+            
+            .broker-section-puprime {
+                padding: 30px 20px;
+            }
+            
+            .puprime-button {
+                font-size: 18px;
+                padding: 18px 35px;
+            }
+            
+            .broker-icon {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="grid-overlay"></div>
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="header-section">
+            <div class="bonus-badge">Riservato solo a chi si è registrato</div>
+            <h1 class="main-title">BONUS ESCLUSIVO</h1>
+            <p class="subtitle">
+                <strong>Guarda subito il video</strong> in cui <strong>Thomas</strong> ti spiega passo dopo passo il sistema che ti darà modo gratuitamente di iniziare a guadagnare potenzialmente subito dopo all'evento.
+            </p>
+        </div>
+        
+        <div class="video-section">
+            <div class="video-container">
+                <div id="vidalytics_embed_uboZd_PuTWyQaU7D" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <p class="cta-text">
+                Per iniziare registrati alla piattaforma
+            </p>
+            <span class="arrow-down">↓</span>
+            
+            <div class="broker-section-puprime">
+                <a href="https://go.puprime.partners/visit/?bta=42699&brand=pu" target="_blank" class="puprime-button">
+                    <svg class="broker-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    Registrati Gratis su PuPrime
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+    (function (v, i, d, a, l, y, t, c, s) {
+        y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
+        if (!vsl){vsl=function(u,cb){
+            if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
+            if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
+            i.getElementsByTagName("head")[0].appendChild(s);
+        };}
+        vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
+    })(window, document, 'Vidalytics', 'vidalytics_embed_uboZd_PuTWyQaU7D', 'https://fast.vidalytics.com/embeds/41zpqkg6/uboZd_PuTWyQaU7D/');
+    </script>
+</body>
+</html>

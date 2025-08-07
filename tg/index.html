@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evento Live Gratuito</title>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2180408928835338');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2180408928835338&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #050510;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Premium animated background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background: #050510;
+            overflow: hidden;
+        }
+        
+        /* Gradient orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .orb1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #6b46c1 0%, transparent 70%);
+            top: -200px;
+            left: -200px;
+            animation-duration: 25s;
+        }
+        
+        .orb2 {
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, #0891b2 0%, transparent 70%);
+            bottom: -300px;
+            right: -200px;
+            animation-duration: 30s;
+            animation-delay: -10s;
+        }
+        
+        .orb3 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 35s;
+            animation-delay: -15s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+        
+        /* Grid overlay */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 10s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Banner */
+        .top-banner {
+            background: linear-gradient(90deg, #dc2626 0%, #991b1b 100%);
+            text-align: center;
+            padding: 12px 20px;
+            font-weight: 600;
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(220, 38, 38, 0.3);
+        }
+        
+        .top-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 5px;
+        }
+        
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Main content */
+        .hero-section {
+            padding: 30px 0 80px;
+            text-align: center;
+        }
+        
+        .headline {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #fbbf24 50%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease-out;
+            text-shadow: 0 0 40px rgba(251, 191, 36, 0.5);
+        }
+        
+        .subheadline {
+            font-size: clamp(18px, 3vw, 24px);
+            font-weight: 600;
+            margin-bottom: 35px;
+            color: #ffffff;
+            animation: fadeInUp 1s ease-out;
+            opacity: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Premium Form */
+        .form-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 48px 40px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: slideIn 1.2s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #dc2626, #7c3aed, #2563eb, #fbbf24);
+            background-size: 300% 300%;
+            border-radius: 24px;
+            opacity: 0.5;
+            z-index: -1;
+            animation: gradient-rotate 8s ease infinite;
+        }
+        
+        @keyframes gradient-rotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .form-title {
+            font-size: 26px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .spots-left {
+            color: #fbbf24;
+            font-size: 18px;
+            margin-bottom: 35px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 18px 20px;
+            font-size: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #fbbf24;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 
+                0 5px 20px rgba(251, 191, 36, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="white" opacity="0.5" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 45px;
+        }
+        
+        select option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+        
+        .phone-input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .country-select {
+            flex: 0 0 140px;
+        }
+        
+        .phone-input {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #000000;
+            font-size: 18px;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.6);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Privacy section */
+        .privacy-info {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+        
+        .privacy-info p {
+            margin-bottom: 5px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.02);
+            margin-top: 120px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+        
+        .footer .container {
+            max-width: 100%;
+            padding: 0 40px;
+        }
+        
+        .disclaimer {
+            max-width: 100%;
+            margin: 0 auto 15px;
+            padding: 30px;
+            background: transparent;
+            border-radius: 0;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+            border: none;
+        }
+        
+        .disclaimer p {
+            margin-bottom: 15px;
+        }
+        
+        .disclaimer a {
+            color: #fbbf24;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .disclaimer a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .footer-links {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+        
+        .footer-links a {
+            color: #fbbf24;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            transform: translateY(-2px);
+            text-decoration: underline;
+        }
+        
+        /* Loading spinner */
+        .loading {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fbbf24;
+            animation: spin 0.8s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .top-banner {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+            
+            .live-dot {
+                width: 8px;
+                height: 8px;
+            }
+            
+            .form-container {
+                padding: 35px 25px;
+            }
+            
+            .form-title {
+                font-size: 20px;
+            }
+            
+            .headline {
+                font-size: 28px;
+            }
+            
+            .subheadline {
+                font-size: 18px;
+            }
+            
+            .phone-input-wrapper {
+                display: flex;
+                gap: 10px;
+            }
+            
+            .country-select {
+                flex: 0 0 100px;
+            }
+            
+            .footer {
+                margin-top: 80px;
+                padding: 40px 0;
+            }
+            
+            .footer .container {
+                padding: 0 20px;
+            }
+            
+            .disclaimer {
+                padding: 20px 0;
+                font-size: 12px;
+            }
+            
+            .footer-links {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .footer-links a {
+                margin: 0;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+    
+    <div class="top-banner">
+        <span class="live-indicator"><span class="live-dot"></span>EVENTO LIVE GRATUITO</span>- Martedì 24 Giugno ore 21:00
+    </div>
+    
+    <div class="container">
+        <section class="hero-section">
+            <h1 class="headline">
+                Sono andato in pensione a 25 anni dopo aver fatto milioni attraverso il mio business online - ora li ho investiti per creare un team di esperti in grado di gestire il mio patrimonio
+            </h1>
+            
+            <p class="subheadline">
+                Scopri come ottenere una rendita in modo semi-automatico replicando le operazioni di analisti con oltre 10 anni di esperienza (100% GRATIS! NON TI CHIEDERÒ NEMMENO 1€!)
+            </p>
+            
+            <div class="form-container">
+                <h2 class="form-title">Inserisci i tuoi dati per prenotare il tuo posto gratuito all'evento di Martedì 24 Giugno</h2>
+                <p class="spots-left">Solo 3000 posti disponibili</p>
+                
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <input type="text" id="fullName" name="fullName" placeholder="Nome e cognome *" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="La tua migliore email *" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="phone-input-wrapper">
+                            <select id="countryCode" class="country-select" required>
+                                <option value="+39">🇮🇹 +39</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+33">🇫🇷 +33</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+41">🇨🇭 +41</option>
+                                <option value="+43">🇦🇹 +43</option>
+                                <option value="+32">🇧🇪 +32</option>
+                                <option value="+31">🇳🇱 +31</option>
+                                <option value="+46">🇸🇪 +46</option>
+                                <option value="+47">🇳🇴 +47</option>
+                                <option value="+45">🇩🇰 +45</option>
+                                <option value="+358">🇫🇮 +358</option>
+                                <option value="+48">🇵🇱 +48</option>
+                                <option value="+420">🇨🇿 +420</option>
+                                <option value="+40">🇷🇴 +40</option>
+                                <option value="+30">🇬🇷 +30</option>
+                                <option value="+351">🇵🇹 +351</option>
+                                <option value="+353">🇮🇪 +353</option>
+                            </select>
+                            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Numero di telefono *" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        PRENOTA ORA IL TUO POSTO
+                    </button>
+                </form>
+                
+                <div class="loading"></div>
+                
+                <div class="privacy-info">
+                    <p>🔒 I tuoi dati sono al sicuro e protetti</p>
+                    <p>📧 Riceverai il link per accedere alla live via email/SMS</p>
+                    <p>⏰ Ti invieremo un promemoria prima dell'evento</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="disclaimer">
+                <p>*I nostri risultati e quelli dei miei studenti non sono tipici. Acquistando o accedendo a CryptoBiz potrai guadagnare di meno o di più rispetto ai risultati che vedi. Tutti i business comportano rischi e tempo per consolidarsi. Se stai cercando "trucchi magici" o "diventa ricco in un giorno" questo NON fa per te. Lasciando i tuoi dati accetti la <a href="https://learn.infobiz.com/privacy-policy-2/" target="_blank">Privacy Policy</a> del sito.</p>
+                
+                <p>I contenuti presenti in CryptoBiz non rappresentano consigli finanziari, ma opinioni soggettive basate sulla nostra esperienza personale. Il mondo delle criptovalute presenta numerosi rischi associati. Riseflow Capital FZCO non è responsabile di eventuali perdite causate dalle tue decisioni. Riseflow Capital FZCO e i suoi associati non ti chiederanno per nessun motivo di gestire i tuoi capitali personali; se dovessi ricevere richieste simili potrebbe trattarsi di malintenzionati non associati alla nostra realtà che si fingono tali. I nostri servizi non sono disponibili ed erogabili a utenti che risiedono negli USA. Fai le tue ricerche ed agisci consapevolmente prima di investire denaro. I bot proposti non assicurano alcun profitto e sono rivolti solo a trader esperti.</p>
+            </div>
+            
+            <div class="footer-links">
+                <a href="https://learn.infobiz.com/privacy-policy-2/" target="_blank">Privacy Policy</a>
+                <a href="https://learn.infobiz.com/cookie-policy/" target="_blank">Cookie Policy</a>
+                <a href="https://learn.infobiz.com/terms-of-service/" target="_blank">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = form.querySelector('.submit-btn');
+            const loading = document.querySelector('.loading');
+            
+            // Get form data
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const countryCode = document.getElementById('countryCode').value;
+            const phone = document.getElementById('phone').value;
+            
+            // Show loading
+            submitBtn.style.display = 'none';
+            loading.style.display = 'block';
+            
+            // Prepare data for URL encoding
+            const urlEncodedData = new URLSearchParams();
+            urlEncodedData.append('nome_completo', fullName);
+            urlEncodedData.append('email', email);
+            urlEncodedData.append('telefono', countryCode + phone);
+            
+            // Send to Zapier webhook
+            fetch('https://hooks.zapier.com/hooks/catch/5789098/uygegzr/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                body: urlEncodedData.toString()
+            })
+            .then(function(response) {
+                // Redirect regardless of response
+                window.location.href = '/thank-you';
+            })
+            .catch(function(error) {
+                // In case of error, redirect anyway
+                window.location.href = '/thank-you';
+            });
+        });
+        
+        // Add floating animation to elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.form-container, .headline, .subheadline');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            elements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.8s ease-out';
+                observer.observe(el);
+            });
+        });
+        
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            // Remove non-numeric characters
+            let value = e.target.value.replace(/\D/g, '');
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

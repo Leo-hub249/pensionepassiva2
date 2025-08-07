@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrazione Confermata - Evento Live Gratuito</title>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2180408928835338');
+    fbq('track', 'Lead');
+    fbq('track', 'CompleteRegistration');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2180408928835338&ev=Lead&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #050510;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Premium animated background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background: #050510;
+            overflow: hidden;
+        }
+        
+        /* Gradient orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .orb1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #6b46c1 0%, transparent 70%);
+            top: -200px;
+            left: -200px;
+            animation-duration: 25s;
+        }
+        
+        .orb2 {
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, #0891b2 0%, transparent 70%);
+            bottom: -300px;
+            right: -200px;
+            animation-duration: 30s;
+            animation-delay: -10s;
+        }
+        
+        .orb3 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 35s;
+            animation-delay: -15s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+        
+        /* Grid overlay */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 10s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* Success animation */
+        .success-checkmark {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 40px;
+            position: relative;
+            animation: scaleIn 0.6s ease-out;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .checkmark-circle {
+            width: 120px;
+            height: 120px;
+            border: 3px solid #10b981;
+            border-radius: 50%;
+            position: relative;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(34, 197, 94, 0.1));
+            box-shadow: 0 0 60px rgba(16, 185, 129, 0.4);
+            animation: pulse-green 2s infinite;
+        }
+        
+        @keyframes pulse-green {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 30px rgba(16, 185, 129, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+        
+        .checkmark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 60px;
+            border: solid #10b981;
+            border-width: 0 4px 4px 0;
+            transform: translate(-50%, -60%) rotate(45deg);
+            animation: checkmark 0.6s ease-out 0.3s both;
+        }
+        
+        @keyframes checkmark {
+            from {
+                transform: translate(-50%, -60%) rotate(45deg) scale(0);
+            }
+            to {
+                transform: translate(-50%, -60%) rotate(45deg) scale(1);
+            }
+        }
+        
+        /* Content */
+        .success-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 20px;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success-title {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff 0%, #fbbf24 50%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(251, 191, 36, 0.5);
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+        
+        .success-message {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .success-message::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #dc2626, #7c3aed, #2563eb, #fbbf24);
+            background-size: 300% 300%;
+            border-radius: 24px;
+            opacity: 0.5;
+            z-index: -1;
+            animation: gradient-rotate 8s ease infinite;
+        }
+        
+        @keyframes gradient-rotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .highlight-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .message-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #e2e8f0;
+            margin-bottom: 0;
+        }
+        
+        .message-text strong {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+        
+        /* Steps Section */
+        .bonus-steps {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .step-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #050510;
+            font-size: 18px;
+            font-weight: 800;
+            padding: 8px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .step-content {
+            text-align: center;
+        }
+        
+        .step-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #e2e8f0;
+            margin-bottom: 20px;
+        }
+        
+        .step-text strong {
+            color: #fbbf24;
+        }
+        
+        /* Telegram Button */
+        .telegram-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #24A1DE 0%, #1E88C7 100%);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(36, 161, 222, 0.4);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: pulse-telegram 2s infinite;
+        }
+        
+        @keyframes pulse-telegram {
+            0% {
+                box-shadow: 0 15px 40px rgba(36, 161, 222, 0.4);
+            }
+            50% {
+                box-shadow: 0 15px 50px rgba(36, 161, 222, 0.6), 0 0 60px rgba(36, 161, 222, 0.3);
+            }
+            100% {
+                box-shadow: 0 15px 40px rgba(36, 161, 222, 0.4);
+            }
+        }
+        
+        .telegram-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .telegram-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(36, 161, 222, 0.6), 0 0 80px rgba(36, 161, 222, 0.4);
+        }
+        
+        .telegram-button:hover::before {
+            left: 100%;
+        }
+        
+        .telegram-icon {
+            width: 28px;
+            height: 28px;
+        }
+        
+        .bonus-alert {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.15));
+            border: 1px solid #fbbf24;
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bonus-alert::before {
+            content: '🎁';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            opacity: 0.3;
+        }
+        
+        .bonus-title {
+            color: #fbbf24;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        /* Telegram Button Section */
+        .telegram-section {
+            margin-top: 40px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(36, 161, 222, 0.15), rgba(36, 161, 222, 0.1));
+            border: 2px solid rgba(36, 161, 222, 0.5);
+            border-radius: 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(36, 161, 222, 0.3);
+        }
+        
+        .telegram-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(36, 161, 222, 0.2) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .telegram-text {
+            font-size: 22px;
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .telegram-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #24A1DE 0%, #1E88C7 100%);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(36, 161, 222, 0.5);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: pulse-telegram 2s infinite;
+        }
+        
+        @keyframes pulse-telegram {
+            0% {
+                box-shadow: 0 15px 40px rgba(36, 161, 222, 0.5);
+            }
+            50% {
+                box-shadow: 0 15px 50px rgba(36, 161, 222, 0.7), 0 0 80px rgba(36, 161, 222, 0.4);
+            }
+            100% {
+                box-shadow: 0 15px 40px rgba(36, 161, 222, 0.5);
+            }
+        }
+        
+        .telegram-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .telegram-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(36, 161, 222, 0.7), 0 0 100px rgba(36, 161, 222, 0.5);
+        }
+        
+        .telegram-button:hover::before {
+            left: 100%;
+        }
+        
+        .telegram-icon {
+            font-size: 32px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.02);
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+        
+        .footer .container {
+            max-width: 100%;
+            padding: 0 40px;
+        }
+        
+        .disclaimer {
+            max-width: 100%;
+            margin: 0 auto 15px;
+            padding: 30px;
+            background: transparent;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+        }
+        
+        .disclaimer p {
+            margin-bottom: 15px;
+        }
+        
+        .disclaimer a {
+            color: #fbbf24;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .disclaimer a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .footer-links {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+        
+        .footer-links a {
+            color: #fbbf24;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            transform: translateY(-2px);
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .success-checkmark {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 30px;
+            }
+            
+            .checkmark-circle {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .success-title {
+                font-size: 32px;
+                margin-bottom: 20px;
+            }
+            
+            .success-message {
+                padding: 30px 20px;
+            }
+            
+            .highlight-text {
+                font-size: 20px;
+            }
+            
+            .message-text {
+                font-size: 16px;
+            }
+            
+            .bonus-alert {
+                padding: 20px;
+            }
+            
+            .bonus-title {
+                font-size: 18px;
+            }
+            
+            .bonus-steps {
+                margin-top: 30px;
+                gap: 20px;
+            }
+            
+            .step-item {
+                padding: 20px;
+            }
+            
+            .step-number {
+                font-size: 16px;
+                padding: 6px 16px;
+                margin-bottom: 15px;
+            }
+            
+            .step-text {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            
+            .telegram-button {
+                font-size: 16px;
+                padding: 16px 30px;
+            }
+            
+            .telegram-icon {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .footer {
+                margin-top: 60px;
+                padding: 40px 0;
+            }
+            
+            .footer .container {
+                padding: 0 20px;
+            }
+            
+            .disclaimer {
+                padding: 20px 0;
+                font-size: 12px;
+            }
+            
+            .footer-links {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .footer-links a {
+                margin: 0;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+    
+    <div class="container">
+        <div class="success-content">
+            <h1 class="success-title">REGISTRAZIONE CONFERMATA!</h1>
+            
+            <div class="success-message">
+                <p class="highlight-text">COMPLETA QUESTI 2 STEP PER RICEVERE IL BONUS!</p>
+                
+                <p class="message-text">
+                    Oltre al link per accedere all'evento del <strong>24 giugno alle 21:00</strong> (lo riceverai via email in pochi minuti), hai diritto ad un <strong>bonus esclusivo</strong>: un video gratuito in cui Thomas spiegherà nel dettaglio il sistema che ti darà modo gratuitamente di iniziare a guadagnare potenzialmente subito dopo all'evento.
+                </p>
+                
+                <div class="bonus-steps">
+                    <div class="step-item">
+                        <div class="step-number">STEP 1</div>
+                        <div class="step-content">
+                            <p class="step-text">Unisciti al canale Telegram per rimanere aggiornato</p>
+                            <a href="https://t.me/+vq_aprJ4juozNTM0" target="_blank" class="telegram-button">
+                                <svg class="telegram-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                                </svg>
+                                Clicca qui per accedere al canale
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">STEP 2</div>
+                        <div class="step-content">
+                            <p class="step-text">Per ricevere il bonus assicurati di rispondere al tutor che ti contatterà su <strong>WhatsApp entro 48 ore</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="disclaimer">
+                <p>*I nostri risultati e quelli dei miei studenti non sono tipici. Acquistando o accedendo a CryptoBiz potrai guadagnare di meno o di più rispetto ai risultati che vedi. Tutti i business comportano rischi e tempo per consolidarsi. Se stai cercando "trucchi magici" o "diventa ricco in un giorno" questo NON fa per te. Lasciando i tuoi dati accetti la <a href="https://learn.infobiz.com/privacy-policy-2/" target="_blank">Privacy Policy</a> del sito.</p>
+                
+                <p>I contenuti presenti in CryptoBiz non rappresentano consigli finanziari, ma opinioni soggettive basate sulla nostra esperienza personale. Il mondo delle criptovalute presenta numerosi rischi associati. Riseflow Capital FZCO non è responsabile di eventuali perdite causate dalle tue decisioni. Riseflow Capital FZCO e i suoi associati non ti chiederanno per nessun motivo di gestire i tuoi capitali personali; se dovessi ricevere richieste simili potrebbe trattarsi di malintenzionati non associati alla nostra realtà che si fingono tali. I nostri servizi non sono disponibili ed erogabili a utenti che risiedono negli USA. Fai le tue ricerche ed agisci consapevolmente prima di investire denaro. I bot proposti non assicurano alcun profitto e sono rivolti solo a trader esperti.</p>
+            </div>
+            
+            <div class="footer-links">
+                <a href="https://learn.infobiz.com/privacy-policy-2/" target="_blank">Privacy Policy</a>
+                <a href="https://learn.infobiz.com/cookie-policy/" target="_blank">Cookie Policy</a>
+                <a href="https://learn.infobiz.com/terms-of-service/" target="_blank">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

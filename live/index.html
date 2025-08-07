@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Live sta per iniziare!</title>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2180408928835338');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2180408928835338&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #fafafa;
+            color: #111827;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        
+        /* Google Fonts Import */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        /* Background gradient animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
+            z-index: -1;
+            animation: gradientShift 20s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        /* Main content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+            min-height: 100vh;
+        }
+        
+        .content-wrapper {
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Live badge */
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
+            animation: pulseBadge 2s ease infinite;
+        }
+        
+        @keyframes pulseBadge {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 15px 40px rgba(239, 68, 68, 0.5); }
+        }
+        
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3); }
+            50% { opacity: 0.8; transform: scale(1.2); box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.1); }
+            100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3); }
+        }
+        
+        .headline {
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #111827 0%, #374151 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subheadline {
+            font-size: 20px;
+            color: #6b7280;
+            margin-bottom: 50px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        
+        /* Countdown styles */
+        .countdown-section {
+            background: #ffffff;
+            border: 1px solid rgba(229, 231, 235, 0.8);
+            border-radius: 32px;
+            padding: 48px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(16, 185, 129, 0.1);
+            position: relative;
+            max-width: 100%;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        
+        .countdown-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.03) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .countdown-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .countdown-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .countdown-item {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 30px 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            border-color: #10b981;
+            background: #ffffff;
+            box-shadow: 0 12px 24px rgba(16, 185, 129, 0.15);
+        }
+        
+        .countdown-value {
+            font-size: 56px;
+            font-weight: 900;
+            color: #10b981;
+            line-height: 1;
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .countdown-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        /* Info section */
+        .info-section {
+            margin: 40px 0;
+        }
+        
+        .info-message {
+            font-size: 18px;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .info-message strong {
+            color: #10b981;
+            font-weight: 700;
+        }
+        
+        /* Enhanced Telegram section */
+        .telegram-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #229ED9;
+            border-radius: 20px;
+            padding: 28px;
+            margin: 30px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(34, 158, 217, 0.15);
+        }
+        
+        .telegram-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #229ED9 0%, #1E88E5 100%);
+        }
+        
+        .telegram-section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(34, 158, 217, 0.05) 0%, transparent 70%);
+            animation: rotate 25s linear infinite;
+        }
+        
+        .telegram-message {
+            font-size: 17px;
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .pointing-arrows {
+            font-size: 22px;
+            margin-bottom: 16px;
+            animation: bounce 1.5s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .telegram-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #229ED9 0%, #1E88E5 100%);
+            color: white;
+            text-decoration: none;
+            padding: 16px 28px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 6px 20px rgba(34, 158, 217, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .telegram-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .telegram-button:hover::before {
+            left: 100%;
+        }
+        
+        .telegram-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 10px 30px rgba(34, 158, 217, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .telegram-button:active {
+            transform: translateY(-1px);
+        }
+        
+        .telegram-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+        
+        /* Loading animation */
+        .loading-message {
+            display: none;
+            font-size: 20px;
+            color: #10b981;
+            margin-top: 30px;
+            font-weight: 600;
+        }
+        
+        .loading-dots {
+            display: inline-block;
+            width: 60px;
+            text-align: left;
+        }
+        
+        .loading-dots::after {
+            content: '';
+            animation: dots 1.5s steps(4) infinite;
+        }
+        
+        @keyframes dots {
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+            100% { content: ''; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 30px 0;
+            }
+            
+            .live-badge {
+                font-size: 12px;
+                padding: 10px 20px;
+                margin-bottom: 20px;
+            }
+            
+            .headline {
+                font-size: 36px;
+                margin-bottom: 15px;
+            }
+            
+            .subheadline {
+                font-size: 18px;
+                margin-bottom: 35px;
+                padding: 0 10px;
+            }
+            
+            .countdown-section {
+                padding: 36px 24px;
+                margin-bottom: 30px;
+                border-radius: 24px;
+            }
+            
+            .countdown-title {
+                font-size: 20px;
+                margin-bottom: 30px;
+            }
+            
+            .countdown-container {
+                gap: 16px;
+                max-width: 340px;
+            }
+            
+            .countdown-item {
+                padding: 24px 20px;
+                border-radius: 16px;
+            }
+            
+            .countdown-value {
+                font-size: 42px;
+                margin-bottom: 10px;
+            }
+            
+            .countdown-label {
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
+            
+            .info-message {
+                font-size: 16px;
+                padding: 0 20px;
+            }
+            
+            .telegram-section {
+                padding: 20px;
+                margin: 20px 10px;
+            }
+            
+            .telegram-message {
+                font-size: 15px;
+            }
+            
+            .telegram-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            
+            .telegram-icon {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .loading-message {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="main-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="live-badge">
+                    <span class="live-dot"></span>
+                    <span id="live-date">LIVE 5 AGOSTO</span>
+                </div>
+                
+                <h1 class="headline">La Live sta per iniziare!</h1>
+                
+                <p class="subheadline">
+                    Preparati a scoprire il metodo che sta permettendo a centinaia di persone<br>
+                    di generare fino a 4000€ al mese in modo semi-automatico
+                </p>
+                
+                <div class="countdown-section">
+                    <p class="countdown-title">L'evento inizia tra:</p>
+                    <div class="countdown-container">
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="hours">00</div>
+                            <div class="countdown-label">ORE</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="minutes">00</div>
+                            <div class="countdown-label">MINUTI</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="seconds">00</div>
+                            <div class="countdown-label">SECONDI</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <p class="info-message">
+                        <strong>Alle 21:00 in punto</strong> verrai reindirizzato automaticamente alla live.
+                    </p>
+                </div>
+                
+                <!-- Discrete Telegram Section -->
+                <div class="telegram-section">
+                    <p class="telegram-message">
+                        Entra nel nostro canale Telegram per ricevere aggiornamenti in tempo reale.
+                    </p>
+                    <a href="https://t.me/+144cSlq2WW0xYmRi" target="_blank" class="telegram-button">
+                        <svg class="telegram-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+                        </svg>
+                        <span>Canale Telegram</span>
+                    </a>
+                </div>
+                
+                <div class="loading-message" id="loadingMessage">
+                    Ti stiamo reindirizzando alla live<span class="loading-dots"></span>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Database dei link StreamYard per ogni giorno
+        // IMPORTANTE: Aggiungi qui i tuoi link per ogni giorno del mese
+        const streamyardLinks = {
+            // Formato: "GIORNO-MESE": "LINK_STREAMYARD"
+            // Agosto 2025
+            "4-8": "https://streamyard.com/watch/M3xytBiQyg4t",
+            "5-8": "https://streamyard.com/watch/vR2ceQpnvzTE",
+            "6-8": "https://streamyard.com/watch/4sEE8ggh6kWr",
+            "7-8": "https://streamyard.com/watch/ra98vab5ithA",
+            "8-8": "https://streamyard.com/watch/7HMXAzzTkJji",
+            "9-8": "https://streamyard.com/watch/h4PqxqkWQu42",
+            "10-8": "https://streamyard.com/watch/ibnD2yUXt69G",
+            "11-8": "https://streamyard.com/watch/BdcermNVHB3f",
+            "12-8": "https://streamyard.com/watch/w4Z4q2GHYEvZ",
+            "13-8": "https://streamyard.com/watch/dFiyxqnEi2HR",
+            "14-8": "https://streamyard.com/watch/dHUsKgB8qFnH",
+            "15-8": "https://streamyard.com/watch/kGM8xHT7XHvE",
+            "16-8": "https://streamyard.com/watch/VxwcNiJQgVna",
+            "17-8": "https://streamyard.com/watch/RpmnzVfVurFF",
+            "18-8": "https://streamyard.com/watch/A2QRzjbDNtpp",
+            "19-8": "https://streamyard.com/watch/LLLLLLLLL",
+            "20-8": "https://streamyard.com/watch/MMMMMMMMM",
+            "21-8": "https://streamyard.com/watch/NNNNNNNNN",
+            "22-8": "https://streamyard.com/watch/OOOOOOOOO",
+            "23-8": "https://streamyard.com/watch/PPPPPPPPP",
+            "24-8": "https://streamyard.com/watch/QQQQQQQQQ",
+            "25-8": "https://streamyard.com/watch/RRRRRRRRR",
+            "26-8": "https://streamyard.com/watch/SSSSSSSSS",
+            "27-8": "https://streamyard.com/watch/TTTTTTTTT",
+            "28-8": "https://streamyard.com/watch/UUUUUUUUU",
+            "29-8": "https://streamyard.com/watch/VVVVVVVVV",
+            "30-8": "https://streamyard.com/watch/WWWWWWWWW",
+            "31-8": "https://streamyard.com/watch/XXXXXXXXX",
+            
+            // Settembre 2025
+            "1-9": "https://streamyard.com/watch/SETTEMBRE1",
+            "2-9": "https://streamyard.com/watch/SETTEMBRE2",
+            // ... continua per tutti i giorni necessari
+            
+            // Link di fallback se non c'è un link specifico per il giorno
+            "default": "https://streamyard.com/watch/DEFAULT_LINK"
+        };
+        
+        // Funzione per ottenere il link StreamYard del giorno
+        function getTodayStreamyardLink() {
+            const now = new Date();
+            const day = now.getDate();
+            const month = now.getMonth() + 1; // JavaScript months are 0-based
+            const key = `${day}-${month}`;
+            
+            // Restituisce il link del giorno o il link di default
+            return streamyardLinks[key] || streamyardLinks["default"];
+        }
+        
+        // Funzione per ottenere la data della live di oggi
+        function getTodayLiveDate() {
+            const now = new Date();
+            return now;
+        }
+        
+        // Funzione per formattare la data in italiano
+        function formatDateItalian(date) {
+            const mesi = [
+                'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+                'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'
+            ];
+            
+            const giorno = date.getDate();
+            const mese = mesi[date.getMonth()];
+            
+            return {
+                giorno: giorno,
+                mese: mese,
+                meseUpperCase: mese.toUpperCase()
+            };
+        }
+        
+        // Aggiorna la data nel badge
+        function updateLiveDate() {
+            const liveDate = getTodayLiveDate();
+            const dateInfo = formatDateItalian(liveDate);
+            
+            const liveDateElement = document.getElementById('live-date');
+            if (liveDateElement) {
+                liveDateElement.textContent = `LIVE ${dateInfo.giorno} ${dateInfo.meseUpperCase}`;
+            }
+        }
+        
+        // Countdown e redirect
+        function initCountdown() {
+            const targetTime = new Date();
+            targetTime.setHours(21, 0, 0, 0); // Imposta alle 21:00 per il countdown
+            
+            const redirectTime = new Date();
+            redirectTime.setHours(20, 30, 0, 0); // Redirect alle 20:30
+            
+            let hasRedirected = false;
+            
+            function updateCountdown() {
+                const now = new Date();
+                const timeRemaining = targetTime - now;
+                
+                // Se sono le 20:30 o dopo, fai il redirect
+                if (now >= redirectTime && !hasRedirected) {
+                    hasRedirected = true;
+                    document.getElementById('loadingMessage').style.display = 'block';
+                    
+                    // Ottieni il link del giorno e fai il redirect
+                    const todayLink = getTodayStreamyardLink();
+                    setTimeout(() => {
+                        window.location.href = todayLink;
+                    }, 2000); // Aspetta 2 secondi per mostrare il messaggio di caricamento
+                    
+                    return;
+                }
+                
+                // Se il countdown è finito (21:00)
+                if (timeRemaining <= 0) {
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    return;
+                }
+                
+                // Calcola ore, minuti, secondi
+                const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                
+                // Aggiorna il display
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000); // Aggiorna ogni secondo
+        }
+        
+        // Inizializza tutto al caricamento della pagina
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLiveDate();
+            initCountdown();
+            
+            // Controlla immediatamente se sono già le 20:30 o dopo
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinutes = now.getMinutes();
+            
+            if (currentHour > 20 || (currentHour === 20 && currentMinutes >= 30)) {
+                document.getElementById('loadingMessage').style.display = 'block';
+                const todayLink = getTodayStreamyardLink();
+                setTimeout(() => {
+                    window.location.href = todayLink;
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>

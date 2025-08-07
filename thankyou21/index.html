@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrazione Confermata!</title>
+    
+    <!-- Redirect Script - DEVE ESSERE PRIMA DI TUTTO -->
+    <script>
+    (function() {
+        // Data dell'evento: 23 luglio 2025 alle 21:00
+        const eventDate = new Date('2025-08-01T21:00:00+02:00');
+        const now = new Date();
+        
+        // Redirect se è già il 23 luglio alle 20:00 o dopo
+        if (now >= new Date('2025-08-01T20:00:00+02:00')) {
+            window.location.href = "https://streamyard.com/watch/43SKB8bFY2JW";
+        }
+    })();
+    </script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2180408928835338');
+    fbq('track', 'PageView');
+    fbq('track', 'CompleteRegistration');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2180408928835338&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Premium animated background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background: #0a0a0f;
+            overflow: hidden;
+        }
+        
+        /* Gradient orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            animation: float 30s infinite ease-in-out;
+        }
+        
+        .orb1 {
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, #10b981 0%, transparent 70%);
+            top: -400px;
+            right: -200px;
+            animation-duration: 35s;
+        }
+        
+        .orb2 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+            bottom: -300px;
+            left: -200px;
+            animation-duration: 40s;
+            animation-delay: -15s;
+        }
+        
+        .orb3 {
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 45s;
+            animation-delay: -25s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            25% {
+                transform: translate(60px, -100px) scale(1.1) rotate(90deg);
+            }
+            50% {
+                transform: translate(-40px, 60px) scale(0.9) rotate(180deg);
+            }
+            75% {
+                transform: translate(80px, 80px) scale(1.05) rotate(270deg);
+            }
+        }
+        
+        /* Animated particles effect */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(16, 185, 129, 0.8);
+            border-radius: 50%;
+            animation: rise 12s infinite linear;
+        }
+        
+        .particle:nth-child(even) {
+            background: rgba(59, 130, 246, 0.8);
+            animation-duration: 15s;
+        }
+        
+        @keyframes rise {
+            from {
+                transform: translateY(100vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) translateX(0) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) translateX(50px) scale(1);
+            }
+            to {
+                transform: translateY(-100px) translateX(100px) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        /* Grid overlay */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(16, 185, 129, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: grid-move 20s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(80px, 80px); }
+        }
+        
+        /* Main container */
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        /* Content */
+        .success-content {
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff 0%, #10b981 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 80px rgba(16, 185, 129, 0.6);
+            animation: glow 3s ease-in-out infinite alternate;
+            line-height: 1.2;
+        }
+        
+        @keyframes glow {
+            from { filter: brightness(1) drop-shadow(0 0 20px rgba(16, 185, 129, 0.5)); }
+            to { filter: brightness(1.2) drop-shadow(0 0 40px rgba(16, 185, 129, 0.8)); }
+        }
+        
+        .message-box {
+            background: linear-gradient(145deg, rgba(16, 185, 129, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 25px;
+            padding: 40px 35px;
+            margin-bottom: 40px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .message-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: shine 4s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .message {
+            font-size: clamp(20px, 3vw, 26px);
+            font-weight: 600;
+            color: #e5e7eb;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .sub-message {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        /* Telegram CTA Styles */
+        .telegram-cta {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .telegram-message {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .telegram-message strong {
+            color: #10b981;
+            font-weight: 700;
+        }
+        
+        .pointing-hands {
+            font-size: 28px;
+            margin-bottom: 20px;
+            animation: pointing 1s ease-in-out infinite;
+        }
+        
+        @keyframes pointing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(5px); }
+        }
+        
+        .telegram-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #229ED9 0%, #1E88E5 100%);
+            color: white;
+            text-decoration: none;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 10px 30px rgba(34, 158, 217, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .telegram-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: telegramShine 3s infinite;
+        }
+        
+        @keyframes telegramShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .telegram-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(34, 158, 217, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .telegram-button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+        
+        .telegram-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+        
+        .info-items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .info-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+        }
+        
+        .icon {
+            font-size: 28px;
+            animation: bounce 2s infinite;
+        }
+        
+        .info-item:nth-child(2) .icon {
+            animation-delay: 0.2s;
+        }
+        
+        .info-item:nth-child(3) .icon {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Countdown styles */
+        .countdown-section {
+            margin-top: 50px;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+        
+        .countdown-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: 30px auto 0;
+            padding: 0 10px;
+        }
+        
+        .countdown-item {
+            background: linear-gradient(145deg, rgba(16, 185, 129, 0.15) 0%, rgba(59, 130, 246, 0.08) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            padding: 25px 15px;
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 
+                0 20px 50px rgba(16, 185, 129, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+        
+        .countdown-value {
+            font-size: clamp(36px, 5vw, 48px);
+            font-weight: 900;
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 10px;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+        }
+        
+        .countdown-label {
+            font-size: clamp(11px, 2vw, 14px);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .countdown-separator {
+            display: none;
+        }
+        
+        /* Footer note */
+        .footer-note {
+            margin-top: 60px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            animation: fadeInUp 0.8s ease-out 1.2s both;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 50px 0;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #10b981, transparent);
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .footer .container {
+            max-width: 100%;
+            padding: 0 40px;
+        }
+        
+        .disclaimer {
+            max-width: 100%;
+            margin: 0 auto 20px;
+            padding: 35px;
+            background: transparent;
+            border-radius: 0;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.9;
+            border: none;
+        }
+        
+        .disclaimer p {
+            margin-bottom: 18px;
+        }
+        
+        .disclaimer a {
+            color: #10b981;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .disclaimer a:hover {
+            color: #059669;
+            text-decoration: underline;
+        }
+        
+        .footer-links {
+            text-align: center;
+            padding: 12px 0;
+            font-size: 15px;
+        }
+        
+        .footer-links a {
+            color: #10b981;
+            text-decoration: none;
+            margin: 0 20px;
+            transition: all 0.3s;
+            display: inline-block;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            transform: translateY(-3px);
+            color: #059669;
+            text-decoration: underline;
+        }
+        
+        /* Responsive - Mobile optimizations */
+        @media (max-width: 768px) {
+            .countdown-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                max-width: 280px;
+            }
+            
+            .countdown-item {
+                padding: 20px 10px;
+            }
+            
+            .countdown-value {
+                font-size: 32px;
+            }
+            
+            .countdown-label {
+                font-size: 11px;
+                letter-spacing: 0.5px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 36px;
+                margin-bottom: 25px;
+                letter-spacing: -1px;
+            }
+            
+            .message-box {
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+            
+            .message {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .sub-message {
+                font-size: 16px;
+            }
+            
+            .info-item {
+                font-size: 15px;
+                padding: 15px;
+                gap: 12px;
+            }
+            
+            .icon {
+                font-size: 24px;
+            }
+            
+            .countdown-section {
+                margin-top: 40px;
+            }
+            
+            .countdown-section > p {
+                font-size: 18px;
+            }
+            
+            .footer {
+                padding: 40px 0;
+            }
+            
+            .footer .container {
+                padding: 0 20px;
+            }
+            
+            .disclaimer {
+                padding: 25px 0;
+                font-size: 13px;
+            }
+            
+            .footer-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .footer-links a {
+                margin: 0;
+                font-size: 13px;
+            }
+            
+            .footer-note {
+                margin-top: 40px;
+                font-size: 13px;
+                padding: 0 20px;
+            }
+            
+            .telegram-message {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+            
+            .pointing-hands {
+                font-size: 24px;
+            }
+            
+            .telegram-button {
+                padding: 15px 28px;
+                font-size: 16px;
+            }
+            
+            .telegram-icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 32px;
+            }
+            
+            .countdown-container {
+                max-width: 240px;
+            }
+            
+            .countdown-item {
+                padding: 15px 8px;
+            }
+            
+            .countdown-value {
+                font-size: 28px;
+            }
+            
+            .countdown-label {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="grid-overlay"></div>
+        <div class="particles">
+            <div class="particle" style="left: 5%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 15%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 25%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 35%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 45%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 55%; animation-delay: 5s;"></div>
+            <div class="particle" style="left: 65%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 75%; animation-delay: 7s;"></div>
+            <div class="particle" style="left: 85%; animation-delay: 8s;"></div>
+            <div class="particle" style="left: 95%; animation-delay: 9s;"></div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="container">
+            <div class="success-content">
+                <h1>REGISTRAZIONE CONFERMATA!</h1>
+                
+                <div class="message-box">
+                    <p class="message">
+                        Perfetto! Ti abbiamo riservato un posto per la Live del 1 Agosto alle ore 21:00
+                    </p>
+                    
+                    <p class="sub-message">
+                        Controlla la tua email, ti abbiamo inviato tutte le informazioni per accedere all'evento.
+                    </p>
+                    
+                    <div class="telegram-cta">
+                        <p class="telegram-message">
+                            <strong>Ma aspetta!</strong> Segui l'ultimo step per confermare il tuo posto all'evento. Clicca il pulsante qua sotto per accedere al gruppo Telegram.
+                        </p>
+                        <p class="pointing-hands">👇🏼👇🏼👇🏼</p>
+                        <a href="https://t.me/+144cSlq2WW0xYmRi" target="_blank" class="telegram-button">
+                            <svg class="telegram-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+                            </svg>
+                            <span>Entra nel Canale Telegram</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="countdown-section">
+                    <p style="margin-bottom: 20px; font-size: 20px; color: rgba(255, 255, 255, 0.9); font-weight: 600;">
+                        La Live inizierà tra:
+                    </p>
+                    <div class="countdown-container">
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="days">00</div>
+                            <div class="countdown-label">GIORNI</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="hours">00</div>
+                            <div class="countdown-label">ORE</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="minutes">00</div>
+                            <div class="countdown-label">MINUTI</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="seconds">00</div>
+                            <div class="countdown-label">SECONDI</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="footer-note">
+                    Se non ricevi l'email entro 5 minuti, controlla la cartella spam o contattaci
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="disclaimer">
+                <p>*I nostri risultati e quelli dei miei studenti non sono tipici. Acquistando o accedendo a CryptoBiz potrai guadagnare di meno o di più rispetto ai risultati che vedi. Tutti i business comportano rischi e tempo per consolidarsi. Se stai cercando "trucchi magici" o "diventa ricco in un giorno" questo NON fa per te. Lasciando i tuoi dati accetti la <a href="https://learn.infobiz.com/privacy-policy-2/" target="_blank">Privacy Policy</a> del sito.</p>
+                
+                <p>I contenuti presenti in CryptoBiz non rappresentano consigli finanziari, ma opinioni soggettive basate sulla nostra esperienza personale. Il mondo delle criptovalute presenta numerosi rischi associati. Riseflow Capital FZCO non è responsabile di eventuali perdite causate dalle tue decisioni. Riseflow Capital FZCO e i suoi associati non ti chiederanno per nessun motivo di gestire i tuoi capitali personali; se dovessi ricevere richieste simili potrebbe trattarsi di malintenzionati non associati alla nostra realtà che si fingono tali. I nostri servizi non sono disponibili ed erogabili a utenti che risiedono negli USA. Fai le tue ricerche ed agisci consapevolmente prima di investire denaro. I bot proposti non assicurano alcun profitto e sono rivolti solo a trader esperti.</p>
+            </div>
+            
+            <div class="footer-links">
+                <a href="https://learn.infobiz.com/privacy-policy-2/" target="_blank">Privacy Policy</a>
+                <a href="https://learn.infobiz.com/cookie-policy/" target="_blank">Cookie Policy</a>
+                <a href="https://learn.infobiz.com/terms-of-service/" target="_blank">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Data dell'evento: 23 luglio 2025 alle 21:00
+        const eventDate = new Date('2025-08-01T21:00:00+02:00');
+        
+        // Controlla l'orario ogni secondo per il redirect
+        function checkTimeAndRedirect() {
+            const now = new Date();
+            
+            // Redirect se è già il 23 luglio alle 20:00 o dopo
+            if (now >= new Date('2025-08-01T20:00:00+02:00')) {
+                window.location.href = "https://streamyard.com/watch/43SKB8bFY2JW";
+            }
+        }
+        
+        // Controlla immediatamente e poi ogni 30 secondi
+        checkTimeAndRedirect();
+        setInterval(checkTimeAndRedirect, 30000);
+        
+        // Countdown timer function
+        function initCountdown() {
+            function updateCountdown() {
+                const now = new Date();
+                const timeRemaining = eventDate - now;
+                
+                if (timeRemaining <= 0) {
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    document.querySelector('.countdown-section p').textContent = 'La Live è iniziata!';
+                    // Redirect automatico quando il countdown arriva a zero
+                    window.location.href = "https://streamyard.com/watch/43SKB8bFY2JW";
+                    return;
+                }
+                
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+        
+        // Initialize countdown on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initCountdown();
+        });
+        
+        // Add hover effect to info items
+        const infoItems = document.querySelectorAll('.info-item');
+        infoItems.forEach((item, index) => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

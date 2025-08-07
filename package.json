@@ -1,0 +1,10 @@
+{
+    "name": "live-forms",
+    "version": "1.0.0",
+    "dependencies": {
+      "googleapis": "^118.0.0",
+      "axios": "^1.6.0"
+    }
+  }
+
+  

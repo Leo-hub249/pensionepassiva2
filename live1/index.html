@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Gratuita - Accedi alle Operazioni degli Esperti</title>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2180408928835338');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2180408928835338&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Premium animated background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background: #0a0a0f;
+            overflow: hidden;
+        }
+        
+        /* Gradient orbs with new color scheme */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 25s infinite ease-in-out;
+        }
+        
+        .orb1 {
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, #10b981 0%, transparent 70%);
+            top: -300px;
+            left: -300px;
+            animation-duration: 30s;
+        }
+        
+        .orb2 {
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+            bottom: -400px;
+            right: -300px;
+            animation-duration: 35s;
+            animation-delay: -10s;
+        }
+        
+        .orb3 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+            top: 40%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            animation-duration: 40s;
+            animation-delay: -20s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, -80px) scale(1.1) rotate(90deg);
+            }
+            50% {
+                transform: translate(-30px, 40px) scale(0.95) rotate(180deg);
+            }
+            75% {
+                transform: translate(70px, 50px) scale(1.05) rotate(270deg);
+            }
+        }
+        
+        /* Animated particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(16, 185, 129, 0.6);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite linear;
+        }
+        
+        .particle:nth-child(even) {
+            background: rgba(59, 130, 246, 0.6);
+            animation-duration: 20s;
+        }
+        
+        @keyframes particleFloat {
+            from {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        /* Grid overlay with gradient */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: grid-move 15s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Banner with new gradient */
+        .top-banner {
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+            text-align: center;
+            padding: 14px 20px;
+            font-weight: 700;
+            font-size: 17px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+            letter-spacing: 0.5px;
+        }
+        
+        .top-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 2.5s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 8px;
+        }
+        
+        .live-dot {
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: pulse 1.2s infinite;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8); }
+            50% { opacity: 0.8; transform: scale(1.3); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+        
+        /* Main content */
+        .hero-section {
+            padding: 40px 0 100px;
+            text-align: center;
+        }
+        
+        .headline {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff 0%, #10b981 40%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease-out, glow 3s ease-in-out infinite alternate;
+            text-shadow: 0 0 60px rgba(16, 185, 129, 0.6);
+        }
+        
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+        
+        .subheadline {
+            font-size: clamp(20px, 3.5vw, 28px);
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: #e5e7eb;
+            animation: fadeInUp 1s ease-out;
+            opacity: 0.95;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Premium Form with enhanced design */
+        .form-container {
+            background: linear-gradient(145deg, rgba(16, 185, 129, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 30px;
+            padding: 55px 45px;
+            max-width: 550px;
+            margin: 0 auto;
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 100px rgba(16, 185, 129, 0.1);
+            animation: slideIn 1.2s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #10b981, #3b82f6, #06b6d4, #10b981);
+            background-size: 400% 400%;
+            border-radius: 30px;
+            opacity: 0.6;
+            z-index: -1;
+            animation: gradient-rotate 10s ease infinite;
+        }
+        
+        @keyframes gradient-rotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.85) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .form-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #d1d5db 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+        
+        .spots-left {
+            color: #10b981;
+            font-size: 20px;
+            margin-bottom: 40px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            animation: blink 2s ease-in-out infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .spots-left::before {
+            content: '🔥';
+            font-size: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 20px 22px;
+            font-size: 17px;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            transition: all 0.4s ease;
+            font-family: inherit;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #10b981;
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 30px rgba(16, 185, 129, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="white" opacity="0.6" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            padding-right: 50px;
+        }
+        
+        select option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+        
+        .phone-input-wrapper {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .country-select {
+            flex: 0 0 150px;
+        }
+        
+        .phone-input {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 22px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            font-size: 19px;
+            font-weight: 900;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 15px;
+            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.5);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.7);
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transition: left 0.6s;
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Privacy section with icons */
+        .privacy-info {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+        
+        .privacy-info p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.02);
+            margin-top: 150px;
+            padding: 50px 0;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #10b981, transparent);
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .footer .container {
+            max-width: 100%;
+            padding: 0 40px;
+        }
+        
+        .disclaimer {
+            max-width: 100%;
+            margin: 0 auto 20px;
+            padding: 35px;
+            background: transparent;
+            border-radius: 0;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.9;
+            border: none;
+        }
+        
+        .disclaimer p {
+            margin-bottom: 18px;
+        }
+        
+        .disclaimer a {
+            color: #10b981;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .disclaimer a:hover {
+            color: #059669;
+            text-decoration: underline;
+        }
+        
+        .footer-links {
+            text-align: center;
+            padding: 12px 0;
+            font-size: 15px;
+        }
+        
+        .footer-links a {
+            color: #10b981;
+            text-decoration: none;
+            margin: 0 20px;
+            transition: all 0.3s;
+            display: inline-block;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            transform: translateY(-3px);
+            color: #059669;
+            text-decoration: underline;
+        }
+        
+        /* Loading spinner enhanced */
+        .loading {
+            display: none;
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: #10b981;
+            border-right-color: #3b82f6;
+            animation: spin 0.8s linear infinite;
+            margin: 25px auto;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .top-banner {
+                font-size: 15px;
+                padding: 12px 15px;
+            }
+            
+            .live-dot {
+                width: 10px;
+                height: 10px;
+            }
+            
+            .form-container {
+                padding: 40px 30px;
+                border-radius: 25px;
+            }
+            
+            .form-title {
+                font-size: 22px;
+            }
+            
+            .headline {
+                font-size: 32px;
+            }
+            
+            .subheadline {
+                font-size: 20px;
+            }
+            
+            .phone-input-wrapper {
+                display: flex;
+                gap: 10px;
+            }
+            
+            .country-select {
+                flex: 0 0 110px;
+            }
+            
+            input, select {
+                padding: 18px 20px;
+                font-size: 16px;
+            }
+            
+            .submit-btn {
+                padding: 20px;
+                font-size: 17px;
+            }
+            
+            .footer {
+                margin-top: 100px;
+                padding: 45px 0;
+            }
+            
+            .footer .container {
+                padding: 0 20px;
+            }
+            
+            .disclaimer {
+                padding: 25px 0;
+                font-size: 13px;
+            }
+            
+            .footer-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .footer-links a {
+                margin: 0;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="grid-overlay"></div>
+        <div class="particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 7s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 8s;"></div>
+        </div>
+    </div>
+    
+    <div class="top-banner">
+        <span class="live-indicator"><span class="live-dot"></span>LIVE 30 GIUGNO ORE 21:00</span>
+    </div>
+    
+    <div class="container">
+        <section class="hero-section">
+            <h1 class="headline">
+                Abbiamo investito oltre 500.000€ in un team di esperti in grado di gestire il nostro capitale con successo
+            </h1>
+            
+            <p class="subheadline">
+                Accedi alle stesse operazioni di esperti con anni di esperienza per farti un extra ogni mese in modo semi-automatico
+            </p>
+            
+            <div class="form-container">
+                <h2 class="form-title">Prenota il tuo posto gratuito per la Live del 30 Giugno</h2>
+                <p class="spots-left">Solo 500 posti disponibili</p>
+                
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <input type="text" id="fullName" name="fullName" placeholder="Nome e cognome *" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="La tua migliore email *" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="phone-input-wrapper">
+                            <select id="countryCode" class="country-select" required>
+                                <option value="+39">🇮🇹 +39</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+33">🇫🇷 +33</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+41">🇨🇭 +41</option>
+                                <option value="+43">🇦🇹 +43</option>
+                                <option value="+32">🇧🇪 +32</option>
+                                <option value="+31">🇳🇱 +31</option>
+                                <option value="+46">🇸🇪 +46</option>
+                                <option value="+47">🇳🇴 +47</option>
+                                <option value="+45">🇩🇰 +45</option>
+                                <option value="+358">🇫🇮 +358</option>
+                                <option value="+48">🇵🇱 +48</option>
+                                <option value="+420">🇨🇿 +420</option>
+                                <option value="+40">🇷🇴 +40</option>
+                                <option value="+30">🇬🇷 +30</option>
+                                <option value="+351">🇵🇹 +351</option>
+                                <option value="+353">🇮🇪 +353</option>
+                            </select>
+                            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Numero di telefono *" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        POSTI ESAURITI
+                    </button>
+                </form>
+                
+                <div class="loading"></div>
+                
+                <div class="privacy-info">
+                    <p>🔒 I tuoi dati sono al sicuro e protetti</p>
+                    <p>📧 Riceverai il link per accedere alla live via email/SMS</p>
+                    <p>⏰ Ti invieremo un promemoria prima dell'evento</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="disclaimer">
+                <p>*I nostri risultati e quelli dei miei studenti non sono tipici. Acquistando o accedendo a CryptoBiz potrai guadagnare di meno o di più rispetto ai risultati che vedi. Tutti i business comportano rischi e tempo per consolidarsi. Se stai cercando "trucchi magici" o "diventa ricco in un giorno" questo NON fa per te. Lasciando i tuoi dati accetti la <a href="https://learn.infobiz.com/privacy-policy-2/" target="_blank">Privacy Policy</a> del sito.</p>
+                
+                <p>I contenuti presenti in CryptoBiz non rappresentano consigli finanziari, ma opinioni soggettive basate sulla nostra esperienza personale. Il mondo delle criptovalute presenta numerosi rischi associati. Riseflow Capital FZCO non è responsabile di eventuali perdite causate dalle tue decisioni. Riseflow Capital FZCO e i suoi associati non ti chiederanno per nessun motivo di gestire i tuoi capitali personali; se dovessi ricevere richieste simili potrebbe trattarsi di malintenzionati non associati alla nostra realtà che si fingono tali. I nostri servizi non sono disponibili ed erogabili a utenti che risiedono negli USA. Fai le tue ricerche ed agisci consapevolmente prima di investire denaro. I bot proposti non assicurano alcun profitto e sono rivolti solo a trader esperti.</p>
+            </div>
+            
+            <div class="footer-links">
+                <a href="https://learn.infobiz.com/privacy-policy-2/" target="_blank">Privacy Policy</a>
+                <a href="https://learn.infobiz.com/cookie-policy/" target="_blank">Cookie Policy</a>
+                <a href="https://learn.infobiz.com/terms-of-service/" target="_blank">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = form.querySelector('.submit-btn');
+            const loading = document.querySelector('.loading');
+            
+            // Get form data
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const countryCode = document.getElementById('countryCode').value;
+            const phone = document.getElementById('phone').value;
+            
+            // Show loading
+            submitBtn.style.display = 'none';
+            loading.style.display = 'block';
+            
+            // Prepare data for URL encoding
+            const urlEncodedData = new URLSearchParams();
+            urlEncodedData.append('nome_completo', fullName);
+            urlEncodedData.append('email', email);
+            urlEncodedData.append('telefono', countryCode + phone);
+            
+            // Send to Zapier webhook
+            fetch('https://hooks.zapier.com/hooks/catch/5789098/ubafaml/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                body: urlEncodedData.toString()
+            })
+            .then(function(response) {
+                // Track conversion
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead');
+                }
+                // Redirect to thank you page
+                window.location.href = '';
+            })
+            .catch(function(error) {
+                // In case of error, redirect anyway
+                window.location.href = '';
+            });
+        });
+        
+        // Add smooth animations on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.form-container, .headline, .subheadline');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            elements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+        
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            // Remove non-numeric characters
+            let value = e.target.value.replace(/\D/g, '');
+            e.target.value = value;
+        });
+        
+        // Add interactive hover effects to form inputs
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'rgba(16, 185, 129, 0.5)';
+            });
+            
+            input.addEventListener('mouseleave', function() {
+                if (this !== document.activeElement) {
+                    this.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

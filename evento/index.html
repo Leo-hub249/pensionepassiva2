@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Evento Inizierà Presto - Preparati!</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        /* Animated background */
+        .background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        /* Particle system */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fbbf24;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particle-float 10s infinite linear;
+        }
+        
+        @keyframes particle-float {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) scale(1.5);
+            }
+        }
+        
+        /* Gradient orbs */
+        .orb-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            filter: blur(100px);
+            opacity: 0.6;
+        }
+        
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+        }
+        
+        .orb1 {
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, #fbbf24 0%, transparent 60%);
+            top: -400px;
+            left: -400px;
+            animation: orb-rotate 30s infinite linear;
+        }
+        
+        .orb2 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #dc2626 0%, transparent 60%);
+            bottom: -300px;
+            right: -300px;
+            animation: orb-rotate 25s infinite linear reverse;
+        }
+        
+        .orb3 {
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, #7c3aed 0%, transparent 60%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: orb-pulse 20s infinite ease-in-out;
+        }
+        
+        @keyframes orb-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes orb-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+        }
+        
+        /* Content container */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            max-width: 900px;
+            width: 100%;
+            margin: auto;
+        }
+        
+        /* Live badge */
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.5);
+            animation: badge-glow 2s infinite;
+        }
+        
+        @keyframes badge-glow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(220, 38, 38, 0.5); }
+            50% { box-shadow: 0 10px 40px rgba(220, 38, 38, 0.8); }
+        }
+        
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.3); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Main title */
+        .main-title {
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #ffffff 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 80px rgba(251, 191, 36, 0.5);
+            animation: title-entrance 1s ease-out;
+        }
+        
+        @keyframes title-entrance {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Countdown container */
+        .countdown-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .countdown-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            border-radius: 16px;
+            padding: 25px 15px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: countdown-entrance 1s ease-out backwards;
+            min-height: 100px;
+        }
+        
+        .countdown-item:nth-child(1) { animation-delay: 0.1s; }
+        .countdown-item:nth-child(2) { animation-delay: 0.2s; }
+        .countdown-item:nth-child(3) { animation-delay: 0.3s; }
+        .countdown-item:nth-child(4) { animation-delay: 0.4s; }
+        
+        @keyframes countdown-entrance {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .countdown-item::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #fbbf24, transparent, #fbbf24);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s;
+            border-radius: 20px;
+        }
+        
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(251, 191, 36, 0.6);
+        }
+        
+        .countdown-item:hover::before {
+            opacity: 0.3;
+        }
+        
+        .countdown-number {
+            font-size: clamp(40px, 5vw, 56px);
+            font-weight: 900;
+            color: #fbbf24;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+        }
+        
+        .countdown-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+        }
+        
+        /* Info section */
+        .info-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            margin-top: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: info-entrance 1s ease-out 0.5s backwards;
+        }
+        
+        @keyframes info-entrance {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .info-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fbbf24;
+        }
+        
+        .info-list {
+            list-style: none;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        
+        .info-list li {
+            padding: 12px 20px;
+            position: relative;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .info-list li::before {
+            content: '✓';
+            color: #fbbf24;
+            font-weight: 700;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        /* CTA button - ENHANCED */
+        .cta-wrapper {
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 24px 50px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #000000;
+            font-size: 20px;
+            font-weight: 800;
+            text-decoration: none;
+            border-radius: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(251, 191, 36, 0.5);
+            animation: cta-entrance 1s ease-out 0.7s backwards, cta-pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        @keyframes cta-entrance {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes cta-pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 15px 40px rgba(251, 191, 36, 0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 20px 50px rgba(251, 191, 36, 0.7);
+            }
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 25px 60px rgba(251, 191, 36, 0.8);
+            animation-play-state: paused;
+        }
+        
+        .cta-hint {
+            margin-top: 15px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .cta-hint::before {
+            content: '📅';
+            font-size: 18px;
+        }
+        
+        /* Redirect notice */
+        .redirect-notice {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.95) 0%, rgba(245, 158, 11, 0.95) 100%);
+            color: #000000;
+            padding: 40px 60px;
+            border-radius: 24px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            max-width: 90%;
+        }
+        
+        .redirect-notice.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .redirect-text {
+            font-size: 24px;
+            font-weight: 900;
+            margin: 20px 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 0;
+            }
+            
+            .main-title {
+                font-size: 36px;
+                margin-bottom: 30px;
+            }
+            
+            .countdown-container {
+                gap: 10px;
+                margin-bottom: 30px;
+            }
+            
+            .countdown-item {
+                padding: 20px 10px;
+                min-height: 90px;
+            }
+            
+            .countdown-number {
+                font-size: 32px;
+            }
+            
+            .countdown-label {
+                font-size: 12px;
+            }
+            
+            .info-section {
+                padding: 25px 20px;
+                margin-top: 30px;
+            }
+            
+            .info-title {
+                font-size: 20px;
+            }
+            
+            .info-list li {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+            
+            .info-list li::before {
+                font-size: 18px;
+            }
+            
+            .cta-button {
+                padding: 20px 35px;
+                font-size: 17px;
+            }
+            
+            .cta-hint {
+                font-size: 13px;
+            }
+            
+            .redirect-notice {
+                padding: 30px 40px;
+                font-size: 18px;
+            }
+            
+            .redirect-text {
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .live-badge {
+                font-size: 12px;
+                padding: 8px 16px;
+                margin-bottom: 20px;
+            }
+            
+            .main-title {
+                font-size: 28px;
+            }
+            
+            .countdown-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .countdown-item {
+                padding: 20px 10px;
+            }
+            
+            .countdown-number {
+                font-size: 36px;
+            }
+            
+            .info-section {
+                padding: 20px 15px;
+            }
+            
+            .info-list {
+                padding: 0;
+            }
+            
+            .info-list li {
+                padding: 8px 10px;
+                font-size: 13px;
+                flex-wrap: wrap;
+                text-align: center;
+            }
+            
+            .info-list li::before {
+                font-size: 16px;
+            }
+            
+            .cta-button {
+                padding: 18px 30px;
+                font-size: 16px;
+            }
+            
+            .redirect-notice {
+                padding: 25px 30px;
+                font-size: 16px;
+            }
+            
+            .redirect-text {
+                font-size: 18px;
+                margin: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="orb-container">
+            <div class="orb orb1"></div>
+            <div class="orb orb2"></div>
+            <div class="orb orb3"></div>
+        </div>
+        <div class="particles" id="particles"></div>
+    </div>
+    
+    <div class="container">
+        <div class="live-badge">
+            <span class="live-dot"></span>
+            <span>Evento Live Esclusivo</span>
+        </div>
+        
+        <h1 class="main-title">L'Evento Inizierà Tra</h1>
+        
+        <div class="countdown-container">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">Giorni</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Ore</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Minuti</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Secondi</div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2 class="info-title">📅 Martedì 24 Giugno 2025 - Ore 21:00</h2>
+            <ul class="info-list">
+                <li>Accesso completamente gratuito all'evento</li>
+                <li>Analisti con oltre 10 anni di esperienza</li>
+                <li>Nessun corso o vendita durante l'evento</li>
+            </ul>
+        </div>
+        
+        <div class="cta-wrapper">
+            <a href="#" class="cta-button">Aggiungi al Calendario</a>
+            <p class="cta-hint">Clicca per salvare l'evento nel tuo calendario</p>
+        </div>
+    </div>
+    
+    <!-- Redirect Notice -->
+    <div class="redirect-notice" id="redirectNotice">
+        <p>🚀 Ti stiamo trasferendo alla sala d'attesa dell'evento!</p>
+        <div class="redirect-text">Reindirizzamento in corso...</div>
+    </div>
+    
+    <script>
+        // Create particle system
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Variables for redirect
+        let hasRedirected = false;
+        const redirectUrl = 'https://streamyard.com/watch/iMdTmwweHkjH';
+        const redirectTime = new Date('2025-06-24T19:30:00+02:00'); // 19:30 Italian time
+        
+        // Function to handle redirect
+        function handleRedirect() {
+            if (hasRedirected) return;
+            hasRedirected = true;
+            
+            const redirectNotice = document.getElementById('redirectNotice');
+            redirectNotice.classList.add('show');
+            
+            // Redirect immediato dopo aver mostrato il messaggio
+            setTimeout(() => {
+                window.location.href = redirectUrl;
+            }, 100); // Solo 100ms per far vedere il messaggio
+        }
+        
+        // Countdown timer
+        function updateCountdown() {
+            // Set target date - June 24, 2025, 21:00 Italian time (CEST)
+            const targetDate = new Date('2025-06-24T21:00:00+02:00');
+            const now = new Date();
+            const difference = targetDate - now;
+            
+            // Check if it's time to redirect (20:30)
+            if (now >= redirectTime && !hasRedirected) {
+                handleRedirect();
+                return;
+            }
+            
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                
+                // Update DOM with animation
+                updateNumber('days', days);
+                updateNumber('hours', hours);
+                updateNumber('minutes', minutes);
+                updateNumber('seconds', seconds);
+            } else {
+                // Event has started
+                document.querySelector('.main-title').textContent = "L'Evento è Iniziato!";
+                document.querySelector('.countdown-container').style.display = 'none';
+            }
+        }
+        
+        function updateNumber(id, value) {
+            const element = document.getElementById(id);
+            const formattedValue = value.toString().padStart(2, '0');
+            
+            if (element.textContent !== formattedValue) {
+                element.style.transform = 'scale(1.2)';
+                element.style.transition = 'transform 0.3s';
+                element.textContent = formattedValue;
+                
+                setTimeout(() => {
+                    element.style.transform = 'scale(1)';
+                }, 300);
+            }
+        }
+        
+        // Calendar event
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const eventDetails = {
+                title: 'Evento Live Gratuito',
+                start: '20250624T210000',
+                end: '20250624T230000',
+                details: 'Link all\'evento: https://pensionepassiva.com/evento/',
+                timezone: 'Europe/Rome'
+            };
+            
+            // Google Calendar URL
+            const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.start}/${eventDetails.end}&details=${encodeURIComponent(eventDetails.details)}&ctz=${eventDetails.timezone}`;
+            
+            window.open(googleUrl, '_blank');
+        });
+        
+        // Initialize
+        createParticles();
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Debug: Add manual redirect button for testing
+        console.log('Redirect scheduled for:', redirectTime.toLocaleString('it-IT', { timeZone: 'Europe/Rome' }));
+        console.log('Current time:', new Date().toLocaleString('it-IT', { timeZone: 'Europe/Rome' }));
+    </script>
+</body>
+</html>
