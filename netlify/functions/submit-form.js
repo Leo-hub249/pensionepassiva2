@@ -104,24 +104,66 @@ async function saveToGoogleSheets(data) {
 
     const sourceName = sourceMap[data.source] || data.source || 'Direct';
 
-    // Prepara i dati per lo sheet
+    // Prepara i dati per lo sheet - SOLO 6 colonne, NO TAG!
     const values = [[
-      data.nome_completo,
-      data.email,
-      data.telefono,
-      dataFormattata,
-      sourceName,
-      phoneWithoutPrefix,
-      data.tag || '' // Tag dinamico AWeber
+      data.nome_completo,      // Colonna A
+      data.email,              // Colonna B
+      data.telefono,           // Colonna C
+      dataFormattata,          // Colonna D
+      sourceName,              // Colonna E
+      phoneWithoutPrefix       // Colonna F
+      // RIMOSSO il tag dalla colonna G
     ]];
+
+    // Prima, ottieni l'ultima riga con dati per copiare la formattazione
+    const rangeResponse = await sheets.spreadsheets.values.get({
+      spreadsheetId: GOOGLE_SHEET_ID,
+      range: 'A:F',
+    });
+
+    const existingRows = rangeResponse.data.values || [];
+    const lastRowNumber = existingRows.length;
 
     // Inserisci i dati
     await sheets.spreadsheets.values.append({
       spreadsheetId: GOOGLE_SHEET_ID,
-      range: 'A:G', // Aggiunta colonna G per il tag
+      range: 'A:F',  // Solo colonne A-F, non G
       valueInputOption: 'USER_ENTERED',
       requestBody: { values }
     });
+
+    // Copia la formattazione dalla riga precedente alla nuova riga
+    if (lastRowNumber > 1) {
+      const newRowNumber = lastRowNumber + 1;
+      
+      // Copia formato dalla riga precedente
+      await sheets.spreadsheets.batchUpdate({
+        spreadsheetId: GOOGLE_SHEET_ID,
+        requestBody: {
+          requests: [
+            {
+              copyPaste: {
+                source: {
+                  sheetId: 0,  // Assume il primo foglio
+                  startRowIndex: lastRowNumber - 1,
+                  endRowIndex: lastRowNumber,
+                  startColumnIndex: 0,
+                  endColumnIndex: 6  // Colonne A-F
+                },
+                destination: {
+                  sheetId: 0,
+                  startRowIndex: newRowNumber - 1,
+                  endRowIndex: newRowNumber,
+                  startColumnIndex: 0,
+                  endColumnIndex: 6
+                },
+                pasteType: 'PASTE_FORMAT'  // Copia solo la formattazione, non i valori
+              }
+            }
+          ]
+        }
+      });
+    }
 
   } catch (error) {
     console.error('Errore Google Sheets:', error);
