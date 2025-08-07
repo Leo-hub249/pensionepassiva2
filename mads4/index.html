@@ -631,31 +631,47 @@
     </footer>
     
     <script>
-        // ===== TRACKING FONTE =====
+        // ===== TRACKING FONTE MIGLIORATO =====
         function getUrlParameter(name) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(name);
         }
     
-        // Ottieni la fonte
+        // Debug: mostra cosa sta rilevando
+        console.log('Current pathname:', window.location.pathname);
+        console.log('Current search:', window.location.search);
+        
+        // Ottieni la fonte - PRIORITÀ ai parametri URL
         let source = getUrlParameter('utm_source') || getUrlParameter('source');
         
+        // Se non c'è parametro URL, controlla il percorso
         if (!source) {
-            const path = window.location.pathname;
-            const pathMap = {
-                '/mads4': 'mads4',
-            };
-            source = pathMap[path] || 'direct';
+            const path = window.location.pathname.toLowerCase();
+            console.log('Checking path:', path);
+            
+            // Controlla percorsi specifici
+            if (path === '/mads4' || path === '/mads4/' || path.includes('mads4')) {
+                source = 'mads4';
+                console.log('Found mads4 in path, setting source to:', source);
+            }
+        }
+        
+        // Se ancora non c'è fonte, usa 'direct'
+        if (!source) {
+            source = 'direct';
         }
     
-        // Salva la fonte
-        if (source && source !== 'direct') {
+        // Salva la fonte nella sessione se non è 'direct'
+        if (source !== 'direct') {
             sessionStorage.setItem('traffic_source', source);
+            console.log('Saved source to sessionStorage:', source);
         }
     
-        const finalSource = source || sessionStorage.getItem('traffic_source') || 'direct';
+        // Usa la fonte dalla sessione se esiste, altrimenti usa quella trovata
+        const finalSource = sessionStorage.getItem('traffic_source') || source;
+        console.log('Final source being used:', finalSource);
     
-        // ===== DATE DINAMICHE (il tuo codice esistente) =====
+        // ===== DATE DINAMICHE =====
         function getNextLiveDate() {
             const now = new Date();
             const currentHour = now.getHours();
@@ -732,18 +748,23 @@
             
             const dynamicTag = generateDynamicTag();
             
+            // Debug: mostra cosa viene inviato
+            console.log('Sending source to function:', finalSource);
+            
             // Prepara i dati per la Netlify Function
             const formData = {
                 nome_completo: fullName,
                 email: email,
                 telefono: countryCode + phone,
                 tag: dynamicTag,
-                source: finalSource,
+                source: finalSource,  // Usa finalSource che abbiamo determinato sopra
                 timestamp: new Date().toISOString()
             };
             
+            console.log('Form data being sent:', formData);
+            
             try {
-                // Invia alla Netlify Function invece che a Zapier
+                // Invia alla Netlify Function
                 const response = await fetch(NETLIFY_FUNCTION_URL, {
                     method: 'POST',
                     headers: {
@@ -758,6 +779,7 @@
                     throw new Error(result.error || 'Errore durante la registrazione');
                 }
                 
+                console.log('Registration successful:', result);
                 
                 // Redirect alla thank you page
                 window.location.href = '/thankyou2';
