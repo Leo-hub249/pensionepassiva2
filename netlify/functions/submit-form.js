@@ -94,8 +94,29 @@ async function saveToGoogleSheets(data) {
     const now = new Date();
     const dataFormattata = now.toLocaleDateString('it-IT') + ' ' + now.toLocaleTimeString('it-IT');
     
-    // Estrai numero senza prefisso
-    const phoneWithoutPrefix = data.telefono.replace(/^\+\d{1,3}/, '');
+    // Estrai numero senza prefisso internazionale
+    // Per l'Italia (+39), rimuovi solo "+39" e mantieni tutto il resto
+    let phoneWithoutPrefix = data.telefono;
+    
+    // Rimuovi il prefisso internazionale mantenendo il numero completo
+    if (data.telefono.startsWith('+39')) {
+      phoneWithoutPrefix = data.telefono.substring(3); // Rimuove "+39"
+    } else if (data.telefono.startsWith('+1')) {
+      phoneWithoutPrefix = data.telefono.substring(2); // Rimuove "+1"
+    } else if (data.telefono.startsWith('+44')) {
+      phoneWithoutPrefix = data.telefono.substring(3); // Rimuove "+44"
+    } else if (data.telefono.startsWith('+49')) {
+      phoneWithoutPrefix = data.telefono.substring(3); // Rimuove "+49"
+    } else if (data.telefono.startsWith('+33')) {
+      phoneWithoutPrefix = data.telefono.substring(3); // Rimuove "+33"
+    } else if (data.telefono.startsWith('+34')) {
+      phoneWithoutPrefix = data.telefono.substring(3); // Rimuove "+34"
+    } else if (data.telefono.startsWith('+41')) {
+      phoneWithoutPrefix = data.telefono.substring(3); // Rimuove "+41"
+    } else if (data.telefono.startsWith('+')) {
+      // Per altri prefissi, rimuovi il + e fino a 3 cifre
+      phoneWithoutPrefix = data.telefono.replace(/^\+\d{1,3}/, '');
+    }
 
     // Mappa delle fonti
     const sourceMap = {
