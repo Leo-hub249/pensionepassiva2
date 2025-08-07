@@ -631,171 +631,164 @@
     </footer>
     
     <script>
-        // ===== TRACKING FONTE MIGLIORATO =====
-        function getUrlParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-    
         // Debug: mostra cosa sta rilevando
-        console.log('Current pathname:', window.location.pathname);
-        console.log('Current search:', window.location.search);
-        
-        // Ottieni la fonte - PRIORITÀ ai parametri URL
-        let source = getUrlParameter('utm_source') || getUrlParameter('source');
-        
-        // Se non c'è parametro URL, controlla il percorso
-        if (!source) {
-            const path = window.location.pathname.toLowerCase();
-            console.log('Checking path:', path);
-            
-            // Controlla percorsi specifici
-            if (path === '/mads2' || path === '/mads2/' || path.includes('mads2')) {
-                source = 'mads2';
-                console.log('Found mads2 in path, setting source to:', source);
-            }
-        }
-        
-        // Se ancora non c'è fonte, usa 'direct'
-        if (!source) {
-            source = 'direct';
-        }
+console.log('Current pathname:', window.location.pathname);
+
+// NON leggere parametri URL - ignoriamo completamente utm_source, source, etc.
+// Controlliamo SOLO il percorso (pathname)
+
+let source = 'direct'; // Default è sempre 'direct'
+
+// Ottieni il percorso e rendilo lowercase per confronto
+const path = window.location.pathname.toLowerCase();
+console.log('Checking path:', path);
+
+// Controlla SOLO i percorsi che vuoi tracciare
+// Aggiungi qui i tuoi percorsi personalizzati
+if (path === '/mads2' || path === '/mads2/') {
+    source = 'mads2';
+    console.log('Found mads2 in path');
+} 
+// Aggiungi altri percorsi qui quando ti servono
+// else if (path === '/altropercorso' || path === '/altropercorso/') {
+//     source = 'altropercorso';
+// }
+
+// Salva la fonte nella sessione solo se non è 'direct'
+if (source !== 'direct') {
+    sessionStorage.setItem('traffic_source', source);
+    console.log('Saved source to sessionStorage:', source);
+}
+
+// Usa la fonte dalla sessione se esiste, altrimenti usa quella trovata
+const finalSource = sessionStorage.getItem('traffic_source') || source;
+console.log('Final source being used:', finalSource);
+
+// ===== DATE DINAMICHE (mantieni il resto del codice come è) =====
+function getNextLiveDate() {
+    const now = new Date();
+    const currentHour = now.getHours();
     
-        // Salva la fonte nella sessione se non è 'direct'
-        if (source !== 'direct') {
-            sessionStorage.setItem('traffic_source', source);
-            console.log('Saved source to sessionStorage:', source);
-        }
+    let liveDate = new Date(now);
     
-        // Usa la fonte dalla sessione se esiste, altrimenti usa quella trovata
-        const finalSource = sessionStorage.getItem('traffic_source') || source;
-        console.log('Final source being used:', finalSource);
+    if (currentHour >= 19) {
+        liveDate.setDate(liveDate.getDate() + 1);
+    }
     
-        // ===== DATE DINAMICHE =====
-        function getNextLiveDate() {
-            const now = new Date();
-            const currentHour = now.getHours();
-            
-            let liveDate = new Date(now);
-            
-            if (currentHour >= 19) {
-                liveDate.setDate(liveDate.getDate() + 1);
-            }
-            
-            return liveDate;
-        }
-        
-        function formatDateItalian(date) {
-            const mesi = [
-                'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
-                'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'
-            ];
-            
-            const giorno = date.getDate();
-            const mese = mesi[date.getMonth()];
-            
-            return {
-                giorno: giorno,
-                mese: mese,
-                meseCapitalized: mese.charAt(0).toUpperCase() + mese.slice(1)
-            };
-        }
-        
-        function updateLiveDates() {
-            const liveDate = getNextLiveDate();
-            const dateInfo = formatDateItalian(liveDate);
-            
-            const bannerElement = document.getElementById('live-date-banner');
-            if (bannerElement) {
-                bannerElement.textContent = `LIVE ${dateInfo.giorno} ${dateInfo.mese.toUpperCase()} ORE 21:00`;
-            }
-            
-            const formTitleElement = document.getElementById('form-title');
-            if (formTitleElement) {
-                formTitleElement.textContent = `Prenota il tuo posto gratuito per la Live del ${dateInfo.giorno} ${dateInfo.meseCapitalized}`;
-            }
-        }
-        
-        function generateDynamicTag() {
-            const liveDate = getNextLiveDate();
-            const giorno = liveDate.getDate();
-            const mese = liveDate.toLocaleDateString('en-US', { month: 'short' }).toLowerCase();
-            const anno = liveDate.getFullYear().toString().slice(-2);
-            
-            return `leads - cpa${giorno} ${mese}${anno}`;
-        }
-        
-        updateLiveDates();
-        setInterval(updateLiveDates, 60000);
-        
-        // ===== FORM SUBMISSION CON NETLIFY FUNCTION =====
-        const NETLIFY_FUNCTION_URL = '/.netlify/functions/submit-form';
-        
-        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const form = e.target;
-            const submitBtn = form.querySelector('.submit-btn');
-            const loading = document.querySelector('.loading');
-            
-            const fullName = document.getElementById('fullName').value;
-            const email = document.getElementById('email').value;
-            const countryCode = document.getElementById('countryCode').value;
-            const phone = document.getElementById('phone').value;
-            
-            submitBtn.style.display = 'none';
-            loading.style.display = 'block';
-            
-            const dynamicTag = generateDynamicTag();
-            
-            // Debug: mostra cosa viene inviato
-            console.log('Sending source to function:', finalSource);
-            
-            // Prepara i dati per la Netlify Function
-            const formData = {
-                nome_completo: fullName,
-                email: email,
-                telefono: countryCode + phone,
-                tag: dynamicTag,
-                source: finalSource,  // Usa finalSource che abbiamo determinato sopra
-                timestamp: new Date().toISOString()
-            };
-            
-            console.log('Form data being sent:', formData);
-            
-            try {
-                // Invia alla Netlify Function
-                const response = await fetch(NETLIFY_FUNCTION_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
+    return liveDate;
+}
+
+function formatDateItalian(date) {
+    const mesi = [
+        'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+        'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'
+    ];
     
-                const result = await response.json();
+    const giorno = date.getDate();
+    const mese = mesi[date.getMonth()];
     
-                if (!response.ok) {
-                    throw new Error(result.error || 'Errore durante la registrazione');
-                }
-                
-                console.log('Registration successful:', result);
-                
-                // Redirect alla thank you page
-                window.location.href = '/thankyou2';
-                
-            } catch (error) {
-                console.error('Errore:', error);
-                // In caso di errore, redirect comunque
-                window.location.href = '/thankyou2';
-            }
+    return {
+        giorno: giorno,
+        mese: mese,
+        meseCapitalized: mese.charAt(0).toUpperCase() + mese.slice(1)
+    };
+}
+
+function updateLiveDates() {
+    const liveDate = getNextLiveDate();
+    const dateInfo = formatDateItalian(liveDate);
+    
+    const bannerElement = document.getElementById('live-date-banner');
+    if (bannerElement) {
+        bannerElement.textContent = `LIVE ${dateInfo.giorno} ${dateInfo.mese.toUpperCase()} ORE 21:00`;
+    }
+    
+    const formTitleElement = document.getElementById('form-title');
+    if (formTitleElement) {
+        formTitleElement.textContent = `Prenota il tuo posto gratuito per la Live del ${dateInfo.giorno} ${dateInfo.meseCapitalized}`;
+    }
+}
+
+function generateDynamicTag() {
+    const liveDate = getNextLiveDate();
+    const giorno = liveDate.getDate();
+    const mese = liveDate.toLocaleDateString('en-US', { month: 'short' }).toLowerCase();
+    const anno = liveDate.getFullYear().toString().slice(-2);
+    
+    return `leads - cpa${giorno} ${mese}${anno}`;
+}
+
+updateLiveDates();
+setInterval(updateLiveDates, 60000);
+
+// ===== FORM SUBMISSION CON NETLIFY FUNCTION =====
+const NETLIFY_FUNCTION_URL = '/.netlify/functions/submit-form';
+
+document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const submitBtn = form.querySelector('.submit-btn');
+    const loading = document.querySelector('.loading');
+    
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const countryCode = document.getElementById('countryCode').value;
+    const phone = document.getElementById('phone').value;
+    
+    submitBtn.style.display = 'none';
+    loading.style.display = 'block';
+    
+    const dynamicTag = generateDynamicTag();
+    
+    // Debug: mostra cosa viene inviato
+    console.log('Sending source to function:', finalSource);
+    
+    // Prepara i dati per la Netlify Function
+    const formData = {
+        nome_completo: fullName,
+        email: email,
+        telefono: countryCode + phone,
+        tag: dynamicTag,
+        source: finalSource,  // Usa finalSource che abbiamo determinato sopra
+        timestamp: new Date().toISOString()
+    };
+    
+    console.log('Form data being sent:', formData);
+    
+    try {
+        // Invia alla Netlify Function
+        const response = await fetch(NETLIFY_FUNCTION_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
         });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || 'Errore durante la registrazione');
+        }
         
-        // Phone number formatting
-        document.getElementById('phone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            e.target.value = value;
-        });
+        console.log('Registration successful:', result);
+        
+        // Redirect alla thank you page
+        window.location.href = '/thankyou2';
+        
+    } catch (error) {
+        console.error('Errore:', error);
+        // In caso di errore, redirect comunque
+        window.location.href = '/thankyou2';
+    }
+});
+
+// Phone number formatting
+document.getElementById('phone').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    e.target.value = value;
+});
     </script>
 </body>
 </html>
