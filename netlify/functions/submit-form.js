@@ -120,7 +120,7 @@ async function saveToGoogleSheets(data) {
 
     // Mappa delle fonti
     const sourceMap = {
-      'mads4': 'MADS',
+      'mads2': 'MADS',
     };
 
     const sourceName = sourceMap[data.source] || data.source || 'Direct';
