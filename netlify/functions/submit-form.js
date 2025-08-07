@@ -90,9 +90,21 @@ async function saveToGoogleSheets(data) {
 
     const sheets = google.sheets({ version: 'v4', auth });
 
-    // Formatta la data
+    // Formatta la data con timezone italiano
     const now = new Date();
-    const dataFormattata = now.toLocaleDateString('it-IT') + ' ' + now.toLocaleTimeString('it-IT');
+    // Converti in orario italiano (CET/CEST)
+    const italianTime = new Date(now.toLocaleString("en-US", {timeZone: "Europe/Rome"}));
+    const dataFormattata = italianTime.toLocaleDateString('it-IT', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      timeZone: 'Europe/Rome'
+    }) + ' ' + italianTime.toLocaleTimeString('it-IT', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZone: 'Europe/Rome'
+    });
     
     // Estrai numero senza prefisso internazionale
     // Per l'Italia (+39), rimuovi solo "+39" e mantieni tutto il resto
@@ -118,12 +130,20 @@ async function saveToGoogleSheets(data) {
       phoneWithoutPrefix = data.telefono.replace(/^\+\d{1,3}/, '');
     }
 
-    // Mappa delle fonti
+    // ===== MODIFICA IMPORTANTE: SOLO FONTI MAPPATE =====
+    // Mappa delle fonti - SOLO queste verranno tracciate, tutto il resto sarà "Direct"
     const sourceMap = {
       'mads2': 'MADS',
+      // Aggiungi qui SOLO i percorsi che vuoi tracciare esplicitamente
+      // Ad esempio:
+      // 'altropercorso': 'AltroNome',
     };
 
-    const sourceName = sourceMap[data.source] || data.source || 'Direct';
+    // IMPORTANTE: Ignora qualsiasi fonte non mappata e usa sempre "Direct"
+    const sourceName = sourceMap[data.source] || 'Direct';
+    
+    // Debug log per vedere cosa sta arrivando
+    console.log('Source ricevuta:', data.source, '-> Mappata a:', sourceName);
 
     // Prepara i dati per lo sheet - SOLO 6 colonne, NO TAG!
     const values = [[
@@ -131,7 +151,7 @@ async function saveToGoogleSheets(data) {
       data.email,              // Colonna B
       data.telefono,           // Colonna C
       dataFormattata,          // Colonna D
-      sourceName,              // Colonna E
+      sourceName,              // Colonna E (SOLO valori mappati o "Direct")
       phoneWithoutPrefix       // Colonna F
       // RIMOSSO il tag dalla colonna G
     ]];
