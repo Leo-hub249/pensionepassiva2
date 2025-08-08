@@ -90,20 +90,18 @@ async function saveToGoogleSheets(data) {
 
     const sheets = google.sheets({ version: 'v4', auth });
 
-    // Formatta la data con timezone italiano
+    // Formatta la data in orario italiano
     const now = new Date();
-    // Converti in orario italiano (CET/CEST)
-    const italianTime = new Date(now.toLocaleString("en-US", {timeZone: "Europe/Rome"}));
-    const dataFormattata = italianTime.toLocaleDateString('it-IT', {
+    
+    // Usa direttamente toLocaleString con timezone Europe/Rome
+    const dataFormattata = now.toLocaleString('it-IT', {
+      timeZone: 'Europe/Rome',
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
-      timeZone: 'Europe/Rome'
-    }) + ' ' + italianTime.toLocaleTimeString('it-IT', {
       hour: '2-digit',
       minute: '2-digit',
-      second: '2-digit',
-      timeZone: 'Europe/Rome'
+      second: '2-digit'
     });
     
     // Estrai numero senza prefisso internazionale
