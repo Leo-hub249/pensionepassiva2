@@ -540,7 +540,7 @@
     <div class="top-banner">
         <span class="live-indicator">
             <span class="live-dot"></span>
-            LIVE 4 AGOSTO ORE 21:00
+            <span id="live-date-banner">LIVE 4 AGOSTO ORE 21:00</span>
         </span>
     </div>
     
@@ -558,7 +558,7 @@
                 </div>
                 
                 <div class="form-container">
-                    <h2 class="form-title">Prenota il tuo posto gratuito per la Live del 4 Agosto</h2>
+                    <h2 class="form-title" id="form-title">Prenota il tuo posto gratuito per la Live del 4 Agosto</h2>
                     <p class="spots-left">Solo 500 posti disponibili</p>
                     
                     <form id="registrationForm">
@@ -631,6 +631,75 @@
     </footer>
     
     <script>
+        // Funzione per ottenere la data della prossima live
+        function getNextLiveDate() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinutes = now.getMinutes();
+            
+            // Se sono prima delle 19:00, mostra la live di oggi
+            // Se sono dopo le 19:00, mostra la live di domani
+            let liveDate = new Date(now);
+            
+            if (currentHour >= 19) {
+                // Dopo le 19, mostra la data di domani
+                liveDate.setDate(liveDate.getDate() + 1);
+            }
+            
+            return liveDate;
+        }
+        
+        // Funzione per formattare la data in italiano
+        function formatDateItalian(date) {
+            const mesi = [
+                'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+                'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'
+            ];
+            
+            const giorno = date.getDate();
+            const mese = mesi[date.getMonth()];
+            
+            return {
+                giorno: giorno,
+                mese: mese,
+                meseCapitalized: mese.charAt(0).toUpperCase() + mese.slice(1)
+            };
+        }
+        
+        // Funzione per aggiornare le date nella pagina
+        function updateLiveDates() {
+            const liveDate = getNextLiveDate();
+            const dateInfo = formatDateItalian(liveDate);
+            
+            // Aggiorna il banner
+            const bannerElement = document.getElementById('live-date-banner');
+            if (bannerElement) {
+                bannerElement.textContent = `LIVE ${dateInfo.giorno} ${dateInfo.mese.toUpperCase()} ORE 21:00`;
+            }
+            
+            // Aggiorna il titolo del form
+            const formTitleElement = document.getElementById('form-title');
+            if (formTitleElement) {
+                formTitleElement.textContent = `Prenota il tuo posto gratuito per la Live del ${dateInfo.giorno} ${dateInfo.meseCapitalized}`;
+            }
+        }
+        
+        // Funzione per generare il tag dinamico
+        function generateDynamicTag() {
+            const liveDate = getNextLiveDate();
+            const giorno = liveDate.getDate();
+            const mese = liveDate.toLocaleDateString('en-US', { month: 'short' }).toLowerCase();
+            const anno = liveDate.getFullYear().toString().slice(-2);
+            
+            return `leads - cpa${giorno} ${mese}${anno}`;
+        }
+        
+        // Aggiorna le date al caricamento della pagina
+        updateLiveDates();
+        
+        // Aggiorna le date ogni minuto per assicurarsi che siano sempre corrette
+        setInterval(updateLiveDates, 60000);
+        
         // Form submission
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -649,11 +718,15 @@
             submitBtn.style.display = 'none';
             loading.style.display = 'block';
             
+            // Genera il tag dinamico
+            const dynamicTag = generateDynamicTag();
+            
             // Prepare data for URL encoding
             const urlEncodedData = new URLSearchParams();
             urlEncodedData.append('nome_completo', fullName);
             urlEncodedData.append('email', email);
             urlEncodedData.append('telefono', countryCode + phone);
+            urlEncodedData.append('tag', dynamicTag); // Aggiungi il tag dinamico
             
             // Send to Zapier webhook
             fetch('https://hooks.zapier.com/hooks/catch/5789098/uygegzr/', {
@@ -666,11 +739,11 @@
             .then(function(response) {
                 // NO TRACKING HERE - Lead event will fire on thank you page
                 // Redirect to thank you page
-                window.location.href = '/thankyou-1';
+                window.location.href = '/thankyou2';
             })
             .catch(function(error) {
                 // In case of error, redirect anyway
-                window.location.href = '/thankyou-1';
+                window.location.href = '/thankyou2';
             });
         });
         
