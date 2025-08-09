@@ -133,6 +133,7 @@ async function saveToGoogleSheets(data) {
     const sourceMap = {
       'mads2': 'MADS',
       'tg2': 'TG',
+      'igs2': 'IGS'
       // Aggiungi qui SOLO i percorsi che vuoi tracciare esplicitamente
       // Ad esempio:
       // 'altropercorso': 'AltroNome',
