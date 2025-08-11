@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+</script>
+</body>
+</html><!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -540,7 +542,7 @@
     <div class="top-banner">
         <span class="live-indicator">
             <span class="live-dot"></span>
-            <span id="live-date-banner">LIVE 4 AGOSTO ORE 21:00</span>
+            <span id="live-date-banner">LIVE 13 AGOSTO ORE 21:00</span>
         </span>
     </div>
     
@@ -558,7 +560,7 @@
                 </div>
                 
                 <div class="form-container">
-                    <h2 class="form-title" id="form-title">Prenota il tuo posto gratuito per la Live del 4 Agosto</h2>
+                    <h2 class="form-title" id="form-title">Prenota il tuo posto gratuito per la Live del 13 Agosto</h2>
                     <p class="spots-left">Solo 500 posti disponibili</p>
                     
                     <form id="registrationForm">
@@ -632,165 +634,166 @@
     
     <script>
         // Debug: mostra cosa sta rilevando
-console.log('Current pathname:', window.location.pathname);
+        console.log('Current pathname:', window.location.pathname);
 
-// NON leggere parametri URL - ignoriamo completamente utm_source, source, etc.
-// Controlliamo SOLO il percorso (pathname)
+        // NON leggere parametri URL - ignoriamo completamente utm_source, source, etc.
+        // Controlliamo SOLO il percorso (pathname)
 
-let source = 'direct'; // Default è sempre 'direct'
+        let source = 'direct'; // Default è sempre 'direct'
 
-// Ottieni il percorso e rendilo lowercase per confronto
-const path = window.location.pathname.toLowerCase();
-console.log('Checking path:', path);
+        // Ottieni il percorso e rendilo lowercase per confronto
+        const path = window.location.pathname.toLowerCase();
+        console.log('Checking path:', path);
 
-// Controlla SOLO i percorsi che vuoi tracciare
-// Aggiungi qui i tuoi percorsi personalizzati
-if (path === '/mads2' || path === '/mads2/') {
-    source = 'mads2';
-    console.log('Found mads2 in path');
-} else if (path === '/tg2' || path === '/tg2/') {
-    source = 'tg2';  // Aggiungi questa parte
-}
-// Aggiungi altri percorsi qui quando ti servono
-// else if (path === '/altropercorso' || path === '/altropercorso/') {
-//     source = 'altropercorso';
-// }
+        // Controlla SOLO i percorsi che vuoi tracciare
+        // Aggiungi qui i tuoi percorsi personalizzati
+        if (path === '/mads2' || path === '/mads2/') {
+            source = 'mads2';
+            console.log('Found mads2 in path');
+        } else if (path === '/tg2' || path === '/tg2/') {
+            source = 'tg2';  // Aggiungi questa parte
+        }
+        // Aggiungi altri percorsi qui quando ti servono
+        // else if (path === '/altropercorso' || path === '/altropercorso/') {
+        //     source = 'altropercorso';
+        // }
 
-// Salva la fonte nella sessione solo se non è 'direct'
-if (source !== 'direct') {
-    sessionStorage.setItem('traffic_source', source);
-    console.log('Saved source to sessionStorage:', source);
-}
+        // Salva la fonte nella sessione solo se non è 'direct'
+        if (source !== 'direct') {
+            sessionStorage.setItem('traffic_source', source);
+            console.log('Saved source to sessionStorage:', source);
+        }
 
-// Usa la fonte dalla sessione se esiste, altrimenti usa quella trovata
-const finalSource = sessionStorage.getItem('traffic_source') || source;
-console.log('Final source being used:', finalSource);
+        // Usa la fonte dalla sessione se esiste, altrimenti usa quella trovata
+        const finalSource = sessionStorage.getItem('traffic_source') || source;
+        console.log('Final source being used:', finalSource);
 
-// ===== DATE DINAMICHE (mantieni il resto del codice come è) =====
-function getNextLiveDate() {
-    const now = new Date();
-    const currentHour = now.getHours();
-    
-    let liveDate = new Date(now);
-    
-    if (currentHour >= 21) {
-        liveDate.setDate(liveDate.getDate() + 1);
-    }
-    
-    return liveDate;
-}
+        // ===== DATE FISSA PER TEST - 13 AGOSTO 2025 =====
+        function getFixedLiveDate() {
+            // Data fissa per il test: 13 Agosto 2025
+            const fixedDate = new Date(2025, 7, 13); // Mese 7 = Agosto (0-indexed)
+            return fixedDate;
+        }
 
-function formatDateItalian(date) {
-    const mesi = [
-        'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
-        'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'
-    ];
-    
-    const giorno = date.getDate();
-    const mese = mesi[date.getMonth()];
-    
-    return {
-        giorno: giorno,
-        mese: mese,
-        meseCapitalized: mese.charAt(0).toUpperCase() + mese.slice(1)
-    };
-}
+        function formatDateItalian(date) {
+            const mesi = [
+                'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+                'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'
+            ];
+            
+            const giorno = date.getDate();
+            const mese = mesi[date.getMonth()];
+            
+            return {
+                giorno: giorno,
+                mese: mese,
+                meseCapitalized: mese.charAt(0).toUpperCase() + mese.slice(1)
+            };
+        }
 
-function updateLiveDates() {
-    const liveDate = getNextLiveDate();
-    const dateInfo = formatDateItalian(liveDate);
-    
-    const bannerElement = document.getElementById('live-date-banner');
-    if (bannerElement) {
-        bannerElement.textContent = `LIVE ${dateInfo.giorno} ${dateInfo.mese.toUpperCase()} ORE 21:00`;
-    }
-    
-    const formTitleElement = document.getElementById('form-title');
-    if (formTitleElement) {
-        formTitleElement.textContent = `Prenota il tuo posto gratuito per la Live del ${dateInfo.giorno} ${dateInfo.meseCapitalized}`;
-    }
-}
+        function updateLiveDates() {
+            // Usa la data fissa invece di quella dinamica
+            const liveDate = getFixedLiveDate();
+            const dateInfo = formatDateItalian(liveDate);
+            
+            const bannerElement = document.getElementById('live-date-banner');
+            if (bannerElement) {
+                bannerElement.textContent = `LIVE ${dateInfo.giorno} ${dateInfo.mese.toUpperCase()} ORE 21:00`;
+            }
+            
+            const formTitleElement = document.getElementById('form-title');
+            if (formTitleElement) {
+                formTitleElement.textContent = `Prenota il tuo posto gratuito per la Live del ${dateInfo.giorno} ${dateInfo.meseCapitalized}`;
+            }
+        }
 
-function generateDynamicTag() {
-    const liveDate = getNextLiveDate();
-    const giorno = liveDate.getDate();
-    const mese = liveDate.toLocaleDateString('en-US', { month: 'short' }).toLowerCase();
-    const anno = liveDate.getFullYear().toString().slice(-2);
-    
-    return `leads - cpa${giorno} ${mese}${anno}`;
-}
+        function generateDynamicTag() {
+            // Usa la data fissa anche per il tag
+            const liveDate = getFixedLiveDate();
+            const giorno = liveDate.getDate();
+            const mese = liveDate.toLocaleDateString('en-US', { month: 'short' }).toLowerCase();
+            const anno = liveDate.getFullYear().toString().slice(-2);
+            
+            return `leads - cpa${giorno} ${mese}${anno}`;
+        }
 
-updateLiveDates();
-setInterval(updateLiveDates, 60000);
+        updateLiveDates();
+        // Non serve più aggiornare ogni minuto dato che la data è fissa
+        // ma lo lascio per mantenere la struttura del codice
+        setInterval(updateLiveDates, 60000);
 
-// ===== FORM SUBMISSION CON NETLIFY FUNCTION =====
-const NETLIFY_FUNCTION_URL = '/.netlify/functions/submit-form';
+        // ===== FORM SUBMISSION CON NETLIFY FUNCTION =====
+        const NETLIFY_FUNCTION_URL = '/.netlify/functions/submit-form';
 
-document.getElementById('registrationForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const form = e.target;
-    const submitBtn = form.querySelector('.submit-btn');
-    const loading = document.querySelector('.loading');
-    
-    const fullName = document.getElementById('fullName').value;
-    const email = document.getElementById('email').value;
-    const countryCode = document.getElementById('countryCode').value;
-    const phone = document.getElementById('phone').value;
-    
-    submitBtn.style.display = 'none';
-    loading.style.display = 'block';
-    
-    const dynamicTag = generateDynamicTag();
-    
-    // Debug: mostra cosa viene inviato
-    console.log('Sending source to function:', finalSource);
-    
-    // Prepara i dati per la Netlify Function
-    const formData = {
-        nome_completo: fullName,
-        email: email,
-        telefono: countryCode + phone,
-        tag: dynamicTag,
-        source: finalSource,  // Usa finalSource che abbiamo determinato sopra
-        timestamp: new Date().toISOString()
-    };
-    
-    console.log('Form data being sent:', formData);
-    
-    try {
-        // Invia alla Netlify Function
-        const response = await fetch(NETLIFY_FUNCTION_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = form.querySelector('.submit-btn');
+            const loading = document.querySelector('.loading');
+            
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const countryCode = document.getElementById('countryCode').value;
+            const phone = document.getElementById('phone').value;
+            
+            submitBtn.style.display = 'none';
+            loading.style.display = 'block';
+            
+            const dynamicTag = generateDynamicTag();
+            
+            // Debug: mostra cosa viene inviato
+            console.log('Sending source to function:', finalSource);
+            
+            // Prepara i dati per la Netlify Function
+            const formData = {
+                nome_completo: fullName,
+                email: email,
+                telefono: countryCode + phone,
+                tag: dynamicTag,
+                source: finalSource,  // Usa finalSource che abbiamo determinato sopra
+                timestamp: new Date().toISOString()
+            };
+            
+            console.log('Form data being sent:', formData);
+            
+            try {
+                // Invia alla Netlify Function
+                const response = await fetch(NETLIFY_FUNCTION_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Errore durante la registrazione');
+                }
+                
+                console.log('Registration successful:', result);
+                
+                // Redirect alla thank you page
+                window.location.href = '/thankyou2';
+                
+            } catch (error) {
+                console.error('Errore:', error);
+                // In caso di errore, redirect comunque
+                window.location.href = '/thankyou2';
+            }
         });
 
-        const result = await response.json();
-
-        if (!response.ok) {
-            throw new Error(result.error || 'Errore durante la registrazione');
-        }
-        
-        console.log('Registration successful:', result);
-        
-        // Redirect alla thank you page
-        window.location.href = '/thankyou2';
-        
-    } catch (error) {
-        console.error('Errore:', error);
-        // In caso di errore, redirect comunque
-        window.location.href = '/thankyou2';
-    }
-});
-
-// Phone number formatting
-document.getElementById('phone').addEventListener('input', function(e) {
-    let value = e.target.value.replace(/\D/g, '');
-    e.target.value = value;
-});
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            e.target.value = value;
+        });
     </script>
 </body>
 </html>
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            e.target.value = value;
+        });

@@ -197,9 +197,9 @@
         
         .countdown-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            max-width: 500px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 600px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -209,7 +209,7 @@
             background: #f9fafb;
             border: 2px solid #e5e7eb;
             border-radius: 20px;
-            padding: 30px 25px;
+            padding: 25px 20px;
             transition: all 0.3s ease;
         }
         
@@ -221,11 +221,11 @@
         }
         
         .countdown-value {
-            font-size: 56px;
+            font-size: 48px;
             font-weight: 900;
             color: #10b981;
             line-height: 1;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-family: 'Inter', sans-serif;
         }
         
@@ -430,18 +430,19 @@
             }
             
             .countdown-container {
-                gap: 16px;
-                max-width: 340px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                max-width: 320px;
             }
             
             .countdown-item {
-                padding: 24px 20px;
+                padding: 20px 15px;
                 border-radius: 16px;
             }
             
             .countdown-value {
-                font-size: 42px;
-                margin-bottom: 10px;
+                font-size: 36px;
+                margin-bottom: 8px;
             }
             
             .countdown-label {
@@ -485,7 +486,7 @@
             <div class="content-wrapper">
                 <div class="live-badge">
                     <span class="live-dot"></span>
-                    <span id="live-date">LIVE 5 AGOSTO</span>
+                    <span id="live-date">LIVE 13 AGOSTO</span>
                 </div>
                 
                 <h1 class="headline">La Live sta per iniziare!</h1>
@@ -498,6 +499,10 @@
                 <div class="countdown-section">
                     <p class="countdown-title">L'evento inizia tra:</p>
                     <div class="countdown-container">
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="days">00</div>
+                            <div class="countdown-label">GIORNI</div>
+                        </div>
                         <div class="countdown-item">
                             <div class="countdown-value" id="hours">00</div>
                             <div class="countdown-label">ORE</div>
@@ -583,21 +588,17 @@
             "default": "https://streamyard.com/watch/DEFAULT_LINK"
         };
         
-        // Funzione per ottenere il link StreamYard del giorno
-        function getTodayStreamyardLink() {
-            const now = new Date();
-            const day = now.getDate();
-            const month = now.getMonth() + 1; // JavaScript months are 0-based
-            const key = `${day}-${month}`;
-            
-            // Restituisce il link del giorno o il link di default
-            return streamyardLinks[key] || streamyardLinks["default"];
+        // ===== DATA FISSA PER TEST - 13 AGOSTO 2025 =====
+        function getFixedLiveDate() {
+            // Data fissa per il test: 13 Agosto 2025
+            const fixedDate = new Date(2025, 7, 13); // Mese 7 = Agosto (0-indexed)
+            return fixedDate;
         }
         
-        // Funzione per ottenere la data della live di oggi
-        function getTodayLiveDate() {
-            const now = new Date();
-            return now;
+        // Funzione per ottenere il link StreamYard fisso per il 13 Agosto
+        function getFixedStreamyardLink() {
+            // Link fisso per il 13 Agosto
+            return streamyardLinks["13-8"] || streamyardLinks["default"];
         }
         
         // Funzione per formattare la data in italiano
@@ -619,7 +620,8 @@
         
         // Aggiorna la data nel badge
         function updateLiveDate() {
-            const liveDate = getTodayLiveDate();
+            // Usa la data fissa
+            const liveDate = getFixedLiveDate();
             const dateInfo = formatDateItalian(liveDate);
             
             const liveDateElement = document.getElementById('live-date');
@@ -630,11 +632,11 @@
         
         // Countdown e redirect
         function initCountdown() {
-            const targetTime = new Date();
-            targetTime.setHours(21, 0, 0, 0); // Imposta alle 21:00 per il countdown
+            // Target time fisso: 13 Agosto 2025 alle 21:00
+            const targetTime = new Date(2025, 7, 13, 21, 0, 0, 0);
             
-            const redirectTime = new Date();
-            redirectTime.setHours(20, 30, 0, 0); // Redirect alle 20:30
+            // Redirect time fisso: 13 Agosto 2025 alle 20:30
+            const redirectTime = new Date(2025, 7, 13, 20, 30, 0, 0);
             
             let hasRedirected = false;
             
@@ -642,34 +644,48 @@
                 const now = new Date();
                 const timeRemaining = targetTime - now;
                 
-                // Se sono le 20:30 o dopo, fai il redirect
+                // Se sono le 20:30 del 13 Agosto o dopo, fai il redirect
                 if (now >= redirectTime && !hasRedirected) {
                     hasRedirected = true;
                     document.getElementById('loadingMessage').style.display = 'block';
                     
-                    // Ottieni il link del giorno e fai il redirect
-                    const todayLink = getTodayStreamyardLink();
+                    // Ottieni il link fisso del 13 Agosto e fai il redirect
+                    const fixedLink = getFixedStreamyardLink();
                     setTimeout(() => {
-                        window.location.href = todayLink;
+                        window.location.href = fixedLink;
                     }, 2000); // Aspetta 2 secondi per mostrare il messaggio di caricamento
                     
                     return;
                 }
                 
-                // Se il countdown è finito (21:00)
+                // Se il countdown è finito (21:00 del 13 Agosto)
                 if (timeRemaining <= 0) {
+                    document.getElementById('days').textContent = '00';
                     document.getElementById('hours').textContent = '00';
                     document.getElementById('minutes').textContent = '00';
                     document.getElementById('seconds').textContent = '00';
+                    
+                    // Se siamo dopo le 21:00 del 13 Agosto, fai comunque il redirect
+                    if (!hasRedirected && now >= targetTime) {
+                        hasRedirected = true;
+                        document.getElementById('loadingMessage').style.display = 'block';
+                        const fixedLink = getFixedStreamyardLink();
+                        setTimeout(() => {
+                            window.location.href = fixedLink;
+                        }, 2000);
+                    }
+                    
                     return;
                 }
                 
-                // Calcola ore, minuti, secondi
-                const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+                // Calcola giorni, ore, minuti, secondi
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
                 
                 // Aggiorna il display
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
                 document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
                 document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
                 document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
@@ -684,16 +700,15 @@
             updateLiveDate();
             initCountdown();
             
-            // Controlla immediatamente se sono già le 20:30 o dopo
+            // Controlla immediatamente se siamo già dopo le 20:30 del 13 Agosto
             const now = new Date();
-            const currentHour = now.getHours();
-            const currentMinutes = now.getMinutes();
+            const redirectTime = new Date(2025, 7, 13, 20, 30, 0, 0);
             
-            if (currentHour > 20 || (currentHour === 20 && currentMinutes >= 30)) {
+            if (now >= redirectTime) {
                 document.getElementById('loadingMessage').style.display = 'block';
-                const todayLink = getTodayStreamyardLink();
+                const fixedLink = getFixedStreamyardLink();
                 setTimeout(() => {
-                    window.location.href = todayLink;
+                    window.location.href = fixedLink;
                 }, 2000);
             }
         });

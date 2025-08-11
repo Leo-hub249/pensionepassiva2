@@ -582,7 +582,7 @@
                 
                 <div class="message-box">
                     <p class="message" id="confirmation-message">
-                        Perfetto! Ti abbiamo riservato un posto per la Live del 4 Agosto alle ore 21:00
+                        Perfetto! Ti abbiamo riservato un posto per la Live del 13 Agosto alle ore 21:00
                     </p>
                     <p class="sub-message">
                         Controlla la tua email, ti abbiamo inviato tutte le informazioni per accedere all'evento.
@@ -604,7 +604,7 @@
                 
                 <div class="info-list">
                     <div class="info-item" data-icon="📅" id="date-info">
-                        <span>La Live si terrà il 4 Agosto alle ore 21:00</span>
+                        <span>La Live si terrà il 13 Agosto alle ore 21:00</span>
                     </div>
                     <div class="info-item" data-icon="📧">
                         <span>Ti invieremo il link tramite mail</span>
@@ -660,24 +660,11 @@
     </footer>
     
     <script>
-        // Funzione per ottenere la data della prossima live
-        function getNextLiveDate() {
-            const now = new Date();
-            const currentHour = now.getHours();
-            
-            // Se sono prima delle 19:00, mostra la live di oggi
-            // Se sono dopo le 19:00, mostra la live di domani
-            let liveDate = new Date(now);
-            
-            if (currentHour >= 21) {
-                // Dopo le 19, mostra la data di domani
-                liveDate.setDate(liveDate.getDate() + 1);
-            }
-            
-            // Imposta l'ora alle 21:00
-            liveDate.setHours(21, 0, 0, 0);
-            
-            return liveDate;
+        // ===== DATA FISSA PER TEST - 13 AGOSTO 2025 =====
+        function getFixedLiveDate() {
+            // Data fissa per il test: 13 Agosto 2025 alle 21:00
+            const fixedDate = new Date(2025, 7, 13, 21, 0, 0, 0); // Mese 7 = Agosto (0-indexed)
+            return fixedDate;
         }
         
         // Funzione per formattare la data in italiano
@@ -699,7 +686,8 @@
         
         // Funzione per aggiornare le date nella pagina
         function updateLiveDates() {
-            const liveDate = getNextLiveDate();
+            // Usa la data fissa invece di quella dinamica
+            const liveDate = getFixedLiveDate();
             const dateInfo = formatDateItalian(liveDate);
             
             // Aggiorna il messaggio di conferma
@@ -718,13 +706,14 @@
         // Aggiorna le date al caricamento della pagina
         updateLiveDates();
         
-        // Aggiorna le date ogni minuto per assicurarsi che siano sempre corrette
+        // Aggiorna le date ogni minuto (anche se con data fissa non cambierà)
         setInterval(updateLiveDates, 60000);
         
         // Countdown timer function
         function initCountdown() {
             function updateCountdown() {
-                const eventDate = getNextLiveDate();
+                // Usa la data fissa per il countdown
+                const eventDate = getFixedLiveDate();
                 const now = new Date();
                 const timeRemaining = eventDate - now;
                 
