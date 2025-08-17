@@ -715,7 +715,13 @@
             console.log('Found mads2 in path');
         } else if (path === '/tg2' || path === '/tg2/') {
             source = 'tg2';
-        }
+        } else if (path === '/igs2' || path === '/igs2/') 
+            source = 'igs2';
+          else if (path === '/igb2' || path === '/igb2/') 
+            source = 'igb2';
+          else if (path === '/tt2' || path === '/tt2/') 
+            source = 'tt2';
+
         // Aggiungi altri percorsi qui quando ti servono
 
         // Salva la fonte nella sessione solo se non è 'direct'
