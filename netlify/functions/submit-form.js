@@ -135,7 +135,8 @@ async function saveToGoogleSheets(data) {
       'tg2': 'TG',
       'igs2': 'IGS',
       'igb2': 'IGB',
-      'tt2': 'TT'
+      'tt2': 'TT',
+      'mail2': 'MAIL'
       // Aggiungi qui SOLO i percorsi che vuoi tracciare esplicitamente
       // Ad esempio:
       // 'altropercorso': 'AltroNome',
