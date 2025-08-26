@@ -131,6 +131,103 @@
                 0 0 30px rgba(245, 186, 19, 0.3);
         }
 
+        /* CTA Section */
+        .cta-section {
+            margin-top: 50px;
+        }
+
+        .cta-title {
+            color: #ffffff;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .cta-arrows-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .cta-arrow-svg {
+            width: 40px;
+            height: 60px;
+            animation: bounce-cta 1.5s ease-in-out infinite;
+        }
+
+        .cta-arrow-svg:nth-child(1) { animation-delay: 0s; }
+        .cta-arrow-svg:nth-child(2) { animation-delay: 0.15s; }
+        .cta-arrow-svg:nth-child(3) { animation-delay: 0.3s; }
+
+        .cta-arrow-svg path {
+            fill: none;
+            stroke: #25D366;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.6));
+        }
+
+        @keyframes bounce-cta {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(15px);
+            }
+        }
+
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 
+                0 10px 30px rgba(37, 211, 102, 0.3),
+                0 0 0 2px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .whatsapp-button:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(37, 211, 102, 0.4),
+                0 0 0 3px rgba(255, 255, 255, 0.2);
+        }
+
+        .whatsapp-icon {
+            width: 30px;
+            height: 30px;
+        }
+
         .footer-text {
             color: rgba(255, 255, 255, 0.6);
             margin-top: 40px;
@@ -165,6 +262,25 @@
             .video-wrapper {
                 border-radius: 15px;
             }
+
+            .cta-title {
+                font-size: 1.6rem;
+                padding: 0 10px;
+            }
+
+            .cta-arrows-container {
+                gap: 20px;
+            }
+
+            .cta-arrow-svg {
+                width: 35px;
+                height: 50px;
+            }
+
+            .whatsapp-button {
+                font-size: 1.1rem;
+                padding: 18px 30px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -189,6 +305,30 @@
                 width: 35px;
                 height: 50px;
             }
+
+            .cta-section {
+                margin-top: 35px;
+            }
+
+            .cta-title {
+                font-size: 1.4rem;
+                margin-bottom: 20px;
+            }
+
+            .cta-arrow-svg {
+                width: 30px;
+                height: 45px;
+            }
+
+            .whatsapp-button {
+                font-size: 1rem;
+                padding: 16px 25px;
+            }
+
+            .whatsapp-icon {
+                width: 25px;
+                height: 25px;
+            }
         }
     </style>
 </head>
@@ -210,6 +350,32 @@
         
         <div class="video-wrapper">
             <div id="vidalytics_embed_t8Xn56OtY0d224sG" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 class="cta-title">Clicca qui per iniziare ora!</h2>
+            
+            <div class="cta-arrows-container">
+                <svg class="cta-arrow-svg" viewBox="0 0 40 60">
+                    <path d="M20 10 L20 45 M10 35 L20 45 L30 35" />
+                </svg>
+                <svg class="cta-arrow-svg" viewBox="0 0 40 60">
+                    <path d="M20 10 L20 45 M10 35 L20 45 L30 35" />
+                </svg>
+                <svg class="cta-arrow-svg" viewBox="0 0 40 60">
+                    <path d="M20 10 L20 45 M10 35 L20 45 L30 35" />
+                </svg>
+            </div>
+
+            <a href="https://wa.me/393508429192?text=Ciao%20Matteo%2C%20vorrei%20accedere%20gratuitamente%20a%20Biz%20Investor%20Club" 
+               target="_blank" 
+               class="whatsapp-button">
+                <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.671.149-.2.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Contattaci su WhatsApp
+            </a>
         </div>
         
         <p class="footer-text">Accesso limitato • Replica disponibile solo oggi</p>
