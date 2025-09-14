@@ -39,7 +39,7 @@
             overflow-x: hidden;
         }
         
-        /* Premium animated background */
+       
         .bg-animation {
             position: fixed;
             width: 100%;
@@ -51,7 +51,7 @@
             overflow: hidden;
         }
         
-        /* Gradient orbs */
+    
         .orb {
             position: absolute;
             border-radius: 50%;
@@ -102,7 +102,7 @@
             }
         }
         
-        /* Grid overlay */
+    
         .grid-overlay {
             position: absolute;
             top: 0;
@@ -129,7 +129,7 @@
             padding: 0 20px;
         }
         
-        /* Banner */
+    
         .top-banner {
             background: linear-gradient(90deg, #15803d 0%, #166534 100%);
             text-align: center;
@@ -172,7 +172,7 @@
             font-size: 18px;
         }
         
-        /* Main content */
+      
         .hero-section {
             padding: 30px 0 80px;
             text-align: center;
@@ -211,7 +211,7 @@
             }
         }
         
-        /* Premium Form */
+
         .form-container {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
             backdrop-filter: blur(20px);
@@ -382,7 +382,7 @@
             left: 100%;
         }
         
-        /* Privacy section */
+       
         .privacy-info {
             margin-top: 25px;
             text-align: center;
@@ -391,7 +391,7 @@
             line-height: 1.6;
         }
         
-        /* Footer */
+       
         .footer {
             background: rgba(255, 255, 255, 0.02);
             margin-top: 120px;
@@ -630,10 +630,10 @@
     </footer>
     
     <script>
-        // Track ViewContent event on page load
+        
         fbq('track', 'ViewContent');
         
-        // Timer countdown
+     
         function startTimer(duration, displayElements) {
             let timer = duration;
             const interval = setInterval(function () {
@@ -655,14 +655,14 @@
             }, 1000);
         }
         
-        // Start countdown timer (1 minute 52 seconds = 112 seconds)
+    
         window.addEventListener('load', function() {
             const topTimer = document.getElementById('topTimer');
             const formTimer = document.getElementById('formTimer');
             startTimer(112, [topTimer, formTimer]);
         });
         
-        // Form submission with Netlify Function
+     
         document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -670,27 +670,27 @@
             const submitBtn = form.querySelector('.submit-btn');
             const loading = document.querySelector('.loading');
             
-            // Get form data
+            
             const fullName = document.getElementById('fullName').value;
             const email = document.getElementById('email').value;
             const countryCode = document.getElementById('countryCode').value;
             const phone = document.getElementById('phone').value;
             
-            // Show loading
+        
             submitBtn.style.display = 'none';
             loading.style.display = 'block';
             
-            // Prepare data for Netlify Function
+           
             const data = {
-                nome_completo: fullName,  // Cambiato da fullName
+                nome_completo: fullName,  
                 email: email,
-                telefono: countryCode + phone,  // Cambiato da phone
+                telefono: countryCode + phone,  
                 source: 'mads-2',
-                tag: 'leads-cpavsl'  // Aggiungi il tag per AWeber
+                tag: 'leads-cpavsl'  
             };
             
             try {
-                // Send to Netlify Function
+                
                 const response = await fetch('/.netlify/functions/submit-form', {  // Cambiato in submit-form
                     method: 'POST',
                     headers: {
@@ -699,17 +699,17 @@
                     body: JSON.stringify(data)
                 });
                 
-                // Redirect to thank you page
+           
                 window.location.href = '/vsl';
                 
             } catch (error) {
                 console.error('Error:', error);
-                // Even if there's an error, redirect to thank you page
+                
                 window.location.href = '/vsl';
             }
         });
         
-        // Add floating animation to elements
+      
         document.addEventListener('DOMContentLoaded', function() {
             const elements = document.querySelectorAll('.form-container, .headline, .subheadline');
             
@@ -730,9 +730,7 @@
             });
         });
         
-        // Phone number formatting
         document.getElementById('phone').addEventListener('input', function(e) {
-            // Remove non-numeric characters
             let value = e.target.value.replace(/\D/g, '');
             e.target.value = value;
         });
