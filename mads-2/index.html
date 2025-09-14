@@ -682,16 +682,16 @@
             
             // Prepare data for Netlify Function
             const data = {
-                fullName: fullName,
+                nome_completo: fullName,  // Cambiato da fullName
                 email: email,
-                phone: countryCode + phone,
+                telefono: countryCode + phone,  // Cambiato da phone
                 source: 'mads-2',
-                tag: 'leads-cpavsl'
+                tag: 'leads-cpavsl'  // Aggiungi il tag per AWeber
             };
             
             try {
                 // Send to Netlify Function
-                const response = await fetch('/.netlify/functions/submit-lead', {
+                const response = await fetch('/.netlify/functions/submit-form', {  // Cambiato in submit-form
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
