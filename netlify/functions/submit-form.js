@@ -131,7 +131,7 @@ async function saveToGoogleSheets(data) {
     // ===== MODIFICA IMPORTANTE: SOLO FONTI MAPPATE =====
     // Mappa delle fonti - SOLO queste verranno tracciate, tutto il resto sarà "Direct"
     const sourceMap = {
-      'mads2': 'MADS',
+      'mads-2': 'MADS',
       'tg2': 'TG',
       'igs2': 'IGS',
       'igb2': 'IGB',

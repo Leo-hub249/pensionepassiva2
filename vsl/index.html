@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accesso al Video - Trading System</title>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2180408928835338');
+    fbq('track', 'PageView');
+    fbq('track', 'Lead'); // Track Lead Event
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2180408928835338&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f0f;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Premium animated background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background: #0f0f0f;
+            overflow: hidden;
+        }
+        
+        /* Gradient orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .orb1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #16a34a 0%, transparent 70%);
+            top: -200px;
+            left: -200px;
+            animation-duration: 25s;
+        }
+        
+        .orb2 {
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, #737373 0%, transparent 70%);
+            bottom: -300px;
+            right: -200px;
+            animation-duration: 30s;
+            animation-delay: -10s;
+        }
+        
+        .orb3 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #15803d 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 35s;
+            animation-delay: -15s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+        
+        /* Grid overlay */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 10s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Section */
+        .header-section {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        
+        .success-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .success-badge .checkmark {
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #16a34a;
+        }
+        
+        .headline {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #a3a3a3 50%, #737373 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+        }
+        
+        .subheadline {
+            font-size: 20px;
+            color: #a3a3a3;
+            margin-bottom: 5px;
+        }
+        
+        /* New Animated Arrows */
+        .arrows-container {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            margin-bottom: 15px;
+        }
+        
+        .arrow-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .arrow {
+            font-size: 50px;
+            color: #16a34a;
+            opacity: 0;
+            animation: arrowFall 2s infinite;
+            text-shadow: 0 0 20px rgba(22, 163, 74, 0.6);
+        }
+        
+        .arrow:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .arrow:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        
+        .arrow:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes arrowFall {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+        
+        /* Video Container */
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto 50px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .video-wrapper {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+        }
+        
+        .cta-text {
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, #ffffff 0%, #e5e5e5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Single arrow for WhatsApp */
+        .whatsapp-arrow {
+            font-size: 60px;
+            color: #25D366;
+            margin-bottom: 10px;
+            animation: bounceWhatsApp 1.5s infinite;
+            text-shadow: 0 0 30px rgba(37, 211, 102, 0.7);
+        }
+        
+        @keyframes bounceWhatsApp {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+        }
+        
+        .whatsapp-icon {
+            width: 30px;
+            height: 30px;
+        }
+        
+        /* Results Section */
+        .results-section {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 80px;
+        }
+        
+        .results-title {
+            text-align: center;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .results-subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: #a3a3a3;
+            margin-bottom: 60px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .result-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .result-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(22, 163, 74, 0.2);
+            border-color: #16a34a;
+        }
+        
+        .result-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.02);
+            margin-top: 120px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .footer .container {
+            max-width: 100%;
+            padding: 0 40px;
+        }
+        
+        .disclaimer {
+            max-width: 100%;
+            margin: 0 auto 15px;
+            padding: 30px;
+            background: transparent;
+            border-radius: 0;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.8;
+            border: none;
+        }
+        
+        .disclaimer p {
+            margin-bottom: 15px;
+        }
+        
+        .disclaimer a {
+            color: #16a34a;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .disclaimer a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .footer-links {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+        
+        .footer-links a {
+            color: #16a34a;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            transform: translateY(-2px);
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .results-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .headline {
+                font-size: 28px;
+            }
+            
+            .results-title {
+                font-size: 28px;
+            }
+            
+            .whatsapp-btn {
+                padding: 15px 30px;
+                font-size: 16px;
+            }
+            
+            .header-section {
+                padding: 40px 0 30px;
+            }
+            
+            .arrows-container {
+                gap: 50px;
+            }
+            
+            .arrow {
+                font-size: 35px;
+            }
+            
+            .cta-text {
+                font-size: 28px;
+            }
+            
+            .whatsapp-arrow {
+                font-size: 45px;
+            }
+            
+            .footer .container {
+                padding: 0 20px;
+            }
+            
+            .disclaimer {
+                padding: 20px 0;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+    
+    <div class="container">
+        <!-- Header Section -->
+        <section class="header-section">
+            <div class="success-badge">
+                <span class="checkmark">✓</span>
+                <span>ACCESSO CONFERMATO</span>
+            </div>
+            
+            <h1 class="headline">
+                Hai Ricevuto l'Accesso al Video Esclusivo
+            </h1>
+            
+            <p class="subheadline">
+                Guarda attentamente il video qui sotto per scoprire il sistema
+            </p>
+        </section>
+        
+        <!-- Animated Arrows pointing to video -->
+        <div class="arrows-container">
+            <div class="arrow-wrapper">
+                <div class="arrow">↓</div>
+            </div>
+            <div class="arrow-wrapper">
+                <div class="arrow">↓</div>
+            </div>
+            <div class="arrow-wrapper">
+                <div class="arrow">↓</div>
+            </div>
+        </div>
+        
+        <!-- Video Section -->
+        <div class="video-container">
+            <div class="video-wrapper">
+                <div id="vidalytics_embed_TzF4AIRQw8jfcl_e" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <p class="cta-text">
+                Per iniziare clicca il pulsante qui sotto
+            </p>
+            
+            <div class="whatsapp-arrow">↓</div>
+            
+            <a href="https://wa.me/393714408271?text=Ciao%20Matteo,%20ho%20visto%20il%20video%20e%20vorrei%20iniziare" 
+               target="_blank" 
+               class="whatsapp-btn">
+                <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Contatta un Nostro Esperto su WhatsApp
+            </a>
+        </section>
+        
+        <!-- Results Section -->
+        <section class="results-section">
+            <h2 class="results-title">
+                Risultati dei Nostri Studenti
+            </h2>
+            <p class="results-subtitle">
+                Ecco alcuni screenshot inviati dalla nostra community
+            </p>
+            
+            <div class="results-grid">
+                <div class="result-item">
+                    <img src="1.jpg" alt="Risultato Trading 1" />
+                </div>
+                <div class="result-item">
+                    <img src="2.jpg" alt="Risultato Trading 2" />
+                </div>
+                <div class="result-item">
+                    <img src="3.jpg" alt="Risultato Trading 3" />
+                </div>
+                <div class="result-item">
+                    <img src="4.jpg" alt="Risultato Trading 4" />
+                </div>
+                <div class="result-item">
+                    <img src="5.jpg" alt="Risultato Trading 5" />
+                </div>
+                <div class="result-item">
+                    <img src="6.jpg" alt="Risultato Trading 6" />
+                </div>
+                <div class="result-item">
+                    <img src="7.jpg" alt="Risultato Trading 7" />
+                </div>
+                <div class="result-item">
+                    <img src="8.jpg" alt="Risultato Trading 8" />
+                </div>
+                <div class="result-item">
+                    <img src="9.jpg" alt="Risultato Trading 9" />
+                </div>
+                <div class="result-item">
+                    <img src="10.jpg" alt="Risultato Trading 10" />
+                </div>
+                <div class="result-item">
+                    <img src="11.jpg" alt="Risultato Trading 11" />
+                </div>
+                <div class="result-item">
+                    <img src="12.jpg" alt="Risultato Trading 12" />
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="disclaimer">
+                <p>*I nostri risultati e quelli dei miei studenti non sono tipici. Acquistando o accedendo a CryptoBiz potrai guadagnare di meno o di più rispetto ai risultati che vedi. Tutti i business comportano rischi e tempo per consolidarsi. Se stai cercando "trucchi magici" o "diventa ricco in un giorno" questo NON fa per te. Lasciando i tuoi dati accetti la <a href="https://learn.infobiz.com/privacy-policy-2/" target="_blank">Privacy Policy</a> del sito.</p>
+                
+                <p>Content is for educational purposes only and does not constitute financial, legal, or tax advice. Past results do not guarantee future performance, and users are solely responsible for their decisions. Services are not available to residents of the USA and UAE. The frontman on sales pages acts solely as an actor on behalf of the company.</p>
+                
+                <p>I contenuti hanno solo finalità educative e non costituiscono consulenza finanziaria, legale o fiscale. I risultati passati non garantiscono performance future e non siamo responsabili delle decisioni degli utenti. I servizi non sono disponibili per residenti in USA e UAE. Il frontman nelle pagine di vendita è un attore per conto della società erogante.</p>
+            </div>
+            
+            <div class="footer-links">
+                <a href="https://learn.infobiz.com/privacy-policy-2/" target="_blank">Privacy Policy</a>
+                <a href="https://learn.infobiz.com/cookie-policy/" target="_blank">Cookie Policy</a>
+                <a href="https://learn.infobiz.com/terms-of-service/" target="_blank">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Vidalytics Script -->
+    <script type="text/javascript">
+    (function (v, i, d, a, l, y, t, c, s) {
+        y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
+        if (!vsl){vsl=function(u,cb){
+            if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
+            if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
+            i.getElementsByTagName("head")[0].appendChild(s);
+        };}
+        vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
+    })(window, document, 'Vidalytics', 'vidalytics_embed_TzF4AIRQw8jfcl_e', 'https://fast.vidalytics.com/embeds/41zpqkg6/TzF4AIRQw8jfcl_e/');
+    </script>
+</body>
+</html>
