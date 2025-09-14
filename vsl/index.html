@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accesso al Video</title>
+    <title>Accesso al Video - Trading System</title>
     
-    <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -17,12 +16,11 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '2180408928835338');
     fbq('track', 'PageView');
-    fbq('track', 'Lead'); // Track Lead Event
+    fbq('track', 'Lead');
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=2180408928835338&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Code -->
     
     <style>
         * {
@@ -39,7 +37,6 @@
             overflow-x: hidden;
         }
         
-        /* Premium animated background */
         .bg-animation {
             position: fixed;
             width: 100%;
@@ -51,7 +48,6 @@
             overflow: hidden;
         }
         
-        /* Gradient orbs */
         .orb {
             position: absolute;
             border-radius: 50%;
@@ -102,7 +98,6 @@
             }
         }
         
-        /* Grid overlay */
         .grid-overlay {
             position: absolute;
             top: 0;
@@ -129,7 +124,6 @@
             padding: 0 20px;
         }
         
-        /* Header Section */
         .header-section {
             padding: 60px 0 40px;
             text-align: center;
@@ -182,7 +176,6 @@
             margin-bottom: 5px;
         }
         
-        /* New Animated Arrows */
         .arrows-container {
             display: flex;
             justify-content: center;
@@ -231,7 +224,6 @@
             }
         }
         
-        /* Video Container */
         .video-container {
             max-width: 900px;
             margin: 0 auto 50px;
@@ -248,7 +240,6 @@
             overflow: hidden;
         }
         
-        /* CTA Section */
         .cta-section {
             text-align: center;
             padding: 40px 0;
@@ -266,7 +257,6 @@
             -webkit-text-fill-color: transparent;
         }
         
-        /* Single arrow for WhatsApp */
         .whatsapp-arrow {
             font-size: 60px;
             color: #25D366;
@@ -305,7 +295,6 @@
             height: 30px;
         }
         
-        /* Results Section */
         .results-section {
             padding: 80px 0;
             background: rgba(255, 255, 255, 0.02);
@@ -332,19 +321,20 @@
         
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
         
         .result-item {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             animation: fadeInUp 0.8s ease-out;
+            aspect-ratio: 1;
         }
         
         @keyframes fadeInUp {
@@ -359,18 +349,92 @@
         }
         
         .result-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(22, 163, 74, 0.2);
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(22, 163, 74, 0.3);
             border-color: #16a34a;
         }
         
         .result-item img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
         }
         
-        /* Footer */
+        .telegram-cta-section {
+            text-align: center;
+            padding: 60px 0 0;
+        }
+        
+        .telegram-arrows {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            margin-bottom: 20px;
+        }
+        
+        .arrow-down-telegram {
+            font-size: 50px;
+            color: #0088cc;
+            opacity: 0;
+            animation: arrowFallTelegram 2s infinite;
+            text-shadow: 0 0 20px rgba(0, 136, 204, 0.6);
+        }
+        
+        .arrow-down-telegram:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .arrow-down-telegram:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        
+        .arrow-down-telegram:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes arrowFallTelegram {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+        
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #0088cc 0%, #0077b5 100%);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 136, 204, 0.3);
+            margin-bottom: 20px;
+        }
+        
+        .telegram-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 136, 204, 0.5);
+            background: linear-gradient(135deg, #00a0e3 0%, #0088cc 100%);
+        }
+        
+        .telegram-icon {
+            width: 30px;
+            height: 30px;
+        }
+        
         .footer {
             background: rgba(255, 255, 255, 0.02);
             margin-top: 120px;
@@ -430,7 +494,6 @@
             text-decoration: underline;
         }
         
-        /* Responsive */
         @media (max-width: 768px) {
             .results-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -448,6 +511,19 @@
             .whatsapp-btn {
                 padding: 15px 30px;
                 font-size: 16px;
+            }
+            
+            .telegram-btn {
+                padding: 15px 30px;
+                font-size: 16px;
+            }
+            
+            .telegram-arrows {
+                gap: 50px;
+            }
+            
+            .arrow-down-telegram {
+                font-size: 40px;
             }
             
             .header-section {
@@ -503,7 +579,6 @@
     </div>
     
     <div class="container">
-        <!-- Header Section -->
         <section class="header-section">
             <div class="success-badge">
                 <span class="checkmark">✓</span>
@@ -519,7 +594,6 @@
             </p>
         </section>
         
-        <!-- Animated Arrows pointing to video -->
         <div class="arrows-container">
             <div class="arrow-wrapper">
                 <div class="arrow">↓</div>
@@ -532,14 +606,12 @@
             </div>
         </div>
         
-        <!-- Video Section -->
         <div class="video-container">
             <div class="video-wrapper">
                 <div id="vidalytics_embed_TzF4AIRQw8jfcl_e" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
             </div>
         </div>
         
-        <!-- CTA Section -->
         <section class="cta-section">
             <p class="cta-text">
                 Per iniziare clicca il pulsante qui sotto
@@ -557,7 +629,6 @@
             </a>
         </section>
         
-        <!-- Results Section -->
         <section class="results-section">
             <h2 class="results-title">
                 Risultati dei Nostri Studenti
@@ -568,46 +639,98 @@
             
             <div class="results-grid">
                 <div class="result-item">
-                    <img src="1.jpg" alt="Risultato Trading 1" />
+                    <img src="1.JPG" alt="Risultato Trading 1" />
                 </div>
                 <div class="result-item">
-                    <img src="2.jpg" alt="Risultato Trading 2" />
+                    <img src="2.JPG" alt="Risultato Trading 2" />
                 </div>
                 <div class="result-item">
-                    <img src="3.jpg" alt="Risultato Trading 3" />
+                    <img src="3.JPG" alt="Risultato Trading 3" />
                 </div>
                 <div class="result-item">
-                    <img src="4.jpg" alt="Risultato Trading 4" />
+                    <img src="4.JPG" alt="Risultato Trading 4" />
                 </div>
                 <div class="result-item">
-                    <img src="5.jpg" alt="Risultato Trading 5" />
+                    <img src="5.JPG" alt="Risultato Trading 5" />
                 </div>
                 <div class="result-item">
-                    <img src="6.jpg" alt="Risultato Trading 6" />
+                    <img src="6.JPG" alt="Risultato Trading 6" />
                 </div>
                 <div class="result-item">
-                    <img src="7.jpg" alt="Risultato Trading 7" />
+                    <img src="7.JPG" alt="Risultato Trading 7" />
                 </div>
                 <div class="result-item">
-                    <img src="8.jpg" alt="Risultato Trading 8" />
+                    <img src="8.JPG" alt="Risultato Trading 8" />
                 </div>
                 <div class="result-item">
-                    <img src="9.jpg" alt="Risultato Trading 9" />
+                    <img src="9.JPG" alt="Risultato Trading 9" />
                 </div>
                 <div class="result-item">
-                    <img src="10.jpg" alt="Risultato Trading 10" />
+                    <img src="10.JPG" alt="Risultato Trading 10" />
                 </div>
                 <div class="result-item">
-                    <img src="11.jpg" alt="Risultato Trading 11" />
+                    <img src="11.JPG" alt="Risultato Trading 11" />
                 </div>
                 <div class="result-item">
-                    <img src="12.jpg" alt="Risultato Trading 12" />
+                    <img src="12.JPG" alt="Risultato Trading 12" />
                 </div>
+                <div class="result-item">
+                    <img src="13.JPG" alt="Risultato Trading 13" />
+                </div>
+                <div class="result-item">
+                    <img src="14.JPG" alt="Risultato Trading 14" />
+                </div>
+                <div class="result-item">
+                    <img src="15.JPG" alt="Risultato Trading 15" />
+                </div>
+                <div class="result-item">
+                    <img src="16.JPG" alt="Risultato Trading 16" />
+                </div>
+                <div class="result-item">
+                    <img src="17.JPG" alt="Risultato Trading 17" />
+                </div>
+                <div class="result-item">
+                    <img src="18.JPG" alt="Risultato Trading 18" />
+                </div>
+                <div class="result-item">
+                    <img src="19.JPG" alt="Risultato Trading 19" />
+                </div>
+                <div class="result-item">
+                    <img src="20.JPG" alt="Risultato Trading 20" />
+                </div>
+                <div class="result-item">
+                    <img src="21.JPG" alt="Risultato Trading 21" />
+                </div>
+                <div class="result-item">
+                    <img src="22.JPG" alt="Risultato Trading 22" />
+                </div>
+                <div class="result-item">
+                    <img src="23.JPG" alt="Risultato Trading 23" />
+                </div>
+                <div class="result-item">
+                    <img src="24.JPG" alt="Risultato Trading 24" />
+                </div>
+            </div>
+            
+            <div class="telegram-cta-section">
+                <div class="telegram-arrows">
+                    <div class="arrow-down-telegram">↓</div>
+                    <div class="arrow-down-telegram">↓</div>
+                    <div class="arrow-down-telegram">↓</div>
+                </div>
+                
+                <a href="https://t.me/+89_xHNcDrQdlNjQ0" 
+                   target="_blank" 
+                   class="telegram-btn">
+                    <svg class="telegram-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                    </svg>
+                    Entra nel canale Telegram per vedere le testimonianze
+                </a>
             </div>
         </section>
     </div>
     
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="disclaimer">
@@ -626,7 +749,6 @@
         </div>
     </footer>
     
-    <!-- Vidalytics Script -->
     <script type="text/javascript">
     (function (v, i, d, a, l, y, t, c, s) {
         y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';

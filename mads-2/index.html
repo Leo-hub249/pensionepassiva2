@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Presentazione Gratuita</title>
     
-    <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -22,7 +21,6 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=2180408928835338&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Code -->
     
     <style>
         * {
@@ -39,7 +37,6 @@
             overflow-x: hidden;
         }
         
-       
         .bg-animation {
             position: fixed;
             width: 100%;
@@ -51,7 +48,6 @@
             overflow: hidden;
         }
         
-    
         .orb {
             position: absolute;
             border-radius: 50%;
@@ -102,7 +98,6 @@
             }
         }
         
-    
         .grid-overlay {
             position: absolute;
             top: 0;
@@ -129,7 +124,6 @@
             padding: 0 20px;
         }
         
-    
         .top-banner {
             background: linear-gradient(90deg, #15803d 0%, #166534 100%);
             text-align: center;
@@ -143,6 +137,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
         
         .top-banner::before {
@@ -172,7 +167,6 @@
             font-size: 18px;
         }
         
-      
         .hero-section {
             padding: 30px 0 80px;
             text-align: center;
@@ -183,11 +177,13 @@
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #ffffff 0%, #a3a3a3 50%, #737373 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
             animation: fadeInUp 0.8s ease-out;
-            text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+        }
+        
+        .headline .green {
+            color: #16a34a;
+            text-shadow: 0 0 30px rgba(22, 163, 74, 0.5);
         }
         
         .subheadline {
@@ -211,17 +207,16 @@
             }
         }
         
-
         .form-container {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 24px;
             padding: 48px 40px;
             max-width: 500px;
             margin: 0 auto;
             box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.6),
+                0 20px 60px rgba(0, 0, 0, 0.5),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             animation: slideIn 1.2s ease-out;
             position: relative;
@@ -318,6 +313,7 @@
             background-repeat: no-repeat;
             background-position: right 15px center;
             padding-right: 45px;
+            color: #ffffff;
         }
         
         select option {
@@ -382,7 +378,6 @@
             left: 100%;
         }
         
-       
         .privacy-info {
             margin-top: 25px;
             text-align: center;
@@ -391,7 +386,21 @@
             line-height: 1.6;
         }
         
-       
+        .loading {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #16a34a;
+            animation: spin 0.8s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
         .footer {
             background: rgba(255, 255, 255, 0.02);
             margin-top: 120px;
@@ -451,27 +460,16 @@
             text-decoration: underline;
         }
         
-        /* Loading spinner */
-        .loading {
-            display: none;
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #16a34a;
-            animation: spin 0.8s linear infinite;
-            margin: 20px auto;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Responsive */
         @media (max-width: 600px) {
             .top-banner {
-                font-size: 14px;
+                font-size: 13px;
                 padding: 10px 15px;
+                line-height: 1.4;
+            }
+            
+            .top-banner span:first-child {
+                width: 100%;
+                margin-bottom: 5px;
             }
             
             .timer {
@@ -501,7 +499,14 @@
             }
             
             .country-select {
-                flex: 0 0 100px;
+                flex: 0 0 120px;
+                font-size: 14px;
+                padding-left: 10px;
+                padding-right: 35px;
+            }
+            
+            select option {
+                font-size: 14px;
             }
             
             .footer {
@@ -547,7 +552,7 @@
     <div class="container">
         <section class="hero-section">
             <h1 class="headline">
-                Ho assunto un team di esperti in grado di moltiplicare il mio patrimonio per me
+                <span class="green">In pensione a 25 anni</span> - Scopri come sono stato in grado di investire parte del mio patrimonio in <span class="green">esperti</span> che mi stanno permettendo di <span class="green">guadagnare ogni giorno</span> in modo semi-automatico
             </h1>
             
             <p class="subheadline">
@@ -614,9 +619,7 @@
     <footer class="footer">
         <div class="container">
             <div class="disclaimer">
-                <p>*I nostri risultati e quelli dei miei studenti non sono tipici. Acquistando o accedendo a CryptoBiz potrai guadagnare di meno o di più rispetto ai risultati che vedi. Tutti i business comportano rischi e tempo per consolidarsi. Se stai cercando "trucchi magici" o "diventa ricco in un giorno" questo NON fa per te. Lasciando i tuoi dati accetti la <a href="https://learn.infobiz.com/privacy-policy-2/" target="_blank">Privacy Policy</a> del sito.</p>
-                
-                <p>Content is for educational purposes only and does not constitute financial, legal, or tax advice. Past results do not guarantee future performance, and users are solely responsible for their decisions. Services are not available to residents of the USA and UAE. The frontman on sales pages acts solely as an actor on behalf of the company.</p>
+                 <p>Content is for educational purposes only and does not constitute financial, legal, or tax advice. Past results do not guarantee future performance, and users are solely responsible for their decisions. Services are not available to residents of the USA and UAE. The frontman on sales pages acts solely as an actor on behalf of the company.</p>
                 
                 <p>I contenuti hanno solo finalità educative e non costituiscono consulenza finanziaria, legale o fiscale. I risultati passati non garantiscono performance future e non siamo responsabili delle decisioni degli utenti. I servizi non sono disponibili per residenti in USA e UAE. Il frontman nelle pagine di vendita è un attore per conto della società erogante.</p>
             </div>
@@ -630,10 +633,8 @@
     </footer>
     
     <script>
-        
         fbq('track', 'ViewContent');
         
-     
         function startTimer(duration, displayElements) {
             let timer = duration;
             const interval = setInterval(function () {
@@ -655,14 +656,12 @@
             }, 1000);
         }
         
-    
         window.addEventListener('load', function() {
             const topTimer = document.getElementById('topTimer');
             const formTimer = document.getElementById('formTimer');
             startTimer(112, [topTimer, formTimer]);
         });
         
-     
         document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -670,28 +669,24 @@
             const submitBtn = form.querySelector('.submit-btn');
             const loading = document.querySelector('.loading');
             
-            
             const fullName = document.getElementById('fullName').value;
             const email = document.getElementById('email').value;
             const countryCode = document.getElementById('countryCode').value;
             const phone = document.getElementById('phone').value;
             
-        
             submitBtn.style.display = 'none';
             loading.style.display = 'block';
             
-           
             const data = {
-                nome_completo: fullName,  
+                nome_completo: fullName,
                 email: email,
-                telefono: countryCode + phone,  
+                telefono: countryCode + phone,
                 source: 'mads-2',
-                tag: 'leads-cpavsl'  
+                tag: 'leads-cpavsl'
             };
             
             try {
-                
-                const response = await fetch('/.netlify/functions/submit-form', {  // Cambiato in submit-form
+                const response = await fetch('/.netlify/functions/submit-form', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -699,17 +694,14 @@
                     body: JSON.stringify(data)
                 });
                 
-           
                 window.location.href = '/vsl';
                 
             } catch (error) {
                 console.error('Error:', error);
-                
                 window.location.href = '/vsl';
             }
         });
         
-      
         document.addEventListener('DOMContentLoaded', function() {
             const elements = document.querySelectorAll('.form-container, .headline, .subheadline');
             
