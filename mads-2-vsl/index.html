@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Presentazione Gratuita</title>
+    
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2180408928835338');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2180408928835338&ev=PageView&noscript=1"
+    /></noscript>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f0f;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background: #0f0f0f;
+            overflow: hidden;
+        }
+        
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .orb1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #16a34a 0%, transparent 70%);
+            top: -200px;
+            left: -200px;
+            animation-duration: 25s;
+        }
+        
+        .orb2 {
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, #737373 0%, transparent 70%);
+            bottom: -300px;
+            right: -200px;
+            animation-duration: 30s;
+            animation-delay: -10s;
+        }
+        
+        .orb3 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #15803d 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 35s;
+            animation-delay: -15s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 10s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .top-banner {
+            background: linear-gradient(90deg, #15803d 0%, #166534 100%);
+            text-align: center;
+            padding: 12px 20px;
+            font-weight: 600;
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(21, 128, 61, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .top-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .timer {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .hero-section {
+            padding: 30px 0 80px;
+            text-align: center;
+        }
+        
+        .headline {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #ffffff;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .headline .green {
+            color: #16a34a;
+            text-shadow: 0 0 30px rgba(22, 163, 74, 0.5);
+        }
+        
+        .subheadline {
+            font-size: clamp(18px, 3vw, 24px);
+            font-weight: 600;
+            margin-bottom: 35px;
+            color: #ffffff;
+            animation: fadeInUp 1s ease-out;
+            opacity: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .form-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 48px 40px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: slideIn 1.2s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #15803d, #737373, #171717, #16a34a);
+            background-size: 300% 300%;
+            border-radius: 24px;
+            opacity: 0.6;
+            z-index: -1;
+            animation: gradient-rotate 8s ease infinite;
+        }
+        
+        @keyframes gradient-rotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .form-title {
+            font-size: 26px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #e5e5e5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .form-subtitle {
+            color: #16a34a;
+            font-size: 18px;
+            margin-bottom: 35px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 18px 20px;
+            font-size: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #16a34a;
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 
+                0 5px 20px rgba(22, 163, 74, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="white" opacity="0.5" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 45px;
+            color: #ffffff;
+        }
+        
+        select option {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+        
+        .phone-input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .country-select {
+            flex: 0 0 140px;
+        }
+        
+        .phone-input {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.4);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(22, 163, 74, 0.6);
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .privacy-info {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+        
+        .loading {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #16a34a;
+            animation: spin 0.8s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.02);
+            margin-top: 120px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .footer .container {
+            max-width: 100%;
+            padding: 0 40px;
+        }
+        
+        .disclaimer {
+            max-width: 100%;
+            margin: 0 auto 15px;
+            padding: 30px;
+            background: transparent;
+            border-radius: 0;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.8;
+            border: none;
+        }
+        
+        .disclaimer p {
+            margin-bottom: 15px;
+        }
+        
+        .disclaimer a {
+            color: #16a34a;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .disclaimer a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .footer-links {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+        
+        .footer-links a {
+            color: #16a34a;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            transform: translateY(-2px);
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .top-banner {
+                font-size: 13px;
+                padding: 10px 15px;
+                line-height: 1.4;
+            }
+            
+            .top-banner span:first-child {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .timer {
+                font-size: 16px;
+                padding: 3px 8px;
+            }
+            
+            .form-container {
+                padding: 35px 25px;
+            }
+            
+            .form-title {
+                font-size: 20px;
+            }
+            
+            .headline {
+                font-size: 28px;
+            }
+            
+            .subheadline {
+                font-size: 18px;
+            }
+            
+            .phone-input-wrapper {
+                display: flex;
+                gap: 10px;
+            }
+            
+            .country-select {
+                flex: 0 0 120px;
+                font-size: 14px;
+                padding-left: 10px;
+                padding-right: 35px;
+            }
+            
+            select option {
+                font-size: 14px;
+            }
+            
+            .footer {
+                margin-top: 80px;
+                padding: 40px 0;
+            }
+            
+            .footer .container {
+                padding: 0 20px;
+            }
+            
+            .disclaimer {
+                padding: 20px 0;
+                font-size: 12px;
+            }
+            
+            .footer-links {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .footer-links a {
+                margin: 0;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+    
+    <div class="top-banner">
+        <span>VIDEO GRATUITO - Registrazioni ancora aperte per</span>
+        <span class="timer" id="topTimer">01:52</span>
+    </div>
+    
+    <div class="container">
+        <section class="hero-section">
+            <h1 class="headline">
+                <span class="green">In pensione a 25 anni</span> - Scopri come sono stato in grado di investire parte del mio patrimonio in <span class="green">esperti</span> che mi stanno permettendo di <span class="green">guadagnare ogni giorno</span> in modo semi-automatico
+            </h1>
+            
+            <p class="subheadline">
+                Scopri come poter accedere alle operazioni dei nostri esperti già da oggi (NESSUN CORSO DA COMPRARE - CI PRENDEREMO SOLO UNA % DEI TUOI RISULTATI)
+            </p>
+            
+            <div class="form-container">
+                <h2 class="form-title">Inserisci i tuoi dati per guardare la video-presentazione gratuita</h2>
+                <p class="form-subtitle">
+                    Registrazioni ancora aperte per <span class="timer" id="formTimer">01:52</span>
+                </p>
+                
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <input type="text" id="fullName" name="fullName" placeholder="Nome e cognome *" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="La tua migliore email *" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="phone-input-wrapper">
+                            <select id="countryCode" class="country-select" required>
+                                <option value="+39">🇮🇹 +39</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+33">🇫🇷 +33</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+41">🇨🇭 +41</option>
+                                <option value="+43">🇦🇹 +43</option>
+                                <option value="+32">🇧🇪 +32</option>
+                                <option value="+31">🇳🇱 +31</option>
+                                <option value="+46">🇸🇪 +46</option>
+                                <option value="+47">🇳🇴 +47</option>
+                                <option value="+45">🇩🇰 +45</option>
+                                <option value="+358">🇫🇮 +358</option>
+                                <option value="+48">🇵🇱 +48</option>
+                                <option value="+420">🇨🇿 +420</option>
+                                <option value="+40">🇷🇴 +40</option>
+                                <option value="+30">🇬🇷 +30</option>
+                                <option value="+351">🇵🇹 +351</option>
+                                <option value="+353">🇮🇪 +353</option>
+                            </select>
+                            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Numero di telefono *" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        GUARDA IL VIDEO ORA
+                    </button>
+                </form>
+                
+                <div class="loading"></div>
+                
+                <div class="privacy-info">
+                    <p>🔒 I tuoi dati sono al sicuro e protetti</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="disclaimer">
+                 <p>Content is for educational purposes only and does not constitute financial, legal, or tax advice. Past results do not guarantee future performance, and users are solely responsible for their decisions. Services are not available to residents of the USA and UAE. The frontman on sales pages acts solely as an actor on behalf of the company.</p>
+                
+                <p>I contenuti hanno solo finalità educative e non costituiscono consulenza finanziaria, legale o fiscale. I risultati passati non garantiscono performance future e non siamo responsabili delle decisioni degli utenti. I servizi non sono disponibili per residenti in USA e UAE. Il frontman nelle pagine di vendita è un attore per conto della società erogante.</p>
+            </div>
+            
+            <div class="footer-links">
+                <a href="https://learn.infobiz.com/privacy-policy-2/" target="_blank">Privacy Policy</a>
+                <a href="https://learn.infobiz.com/cookie-policy/" target="_blank">Cookie Policy</a>
+                <a href="https://learn.infobiz.com/terms-of-service/" target="_blank">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        fbq('track', 'ViewContent');
+        
+        function startTimer(duration, displayElements) {
+            let timer = duration;
+            const interval = setInterval(function () {
+                const minutes = parseInt(timer / 60, 10);
+                const seconds = parseInt(timer % 60, 10);
+                
+                const display = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+                
+                displayElements.forEach(element => {
+                    element.textContent = display;
+                });
+                
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    displayElements.forEach(element => {
+                        element.textContent = '00:00';
+                    });
+                }
+            }, 1000);
+        }
+        
+        window.addEventListener('load', function() {
+            const topTimer = document.getElementById('topTimer');
+            const formTimer = document.getElementById('formTimer');
+            startTimer(112, [topTimer, formTimer]);
+        });
+        
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = form.querySelector('.submit-btn');
+            const loading = document.querySelector('.loading');
+            
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const countryCode = document.getElementById('countryCode').value;
+            const phone = document.getElementById('phone').value;
+            
+            submitBtn.style.display = 'none';
+            loading.style.display = 'block';
+            
+            const data = {
+                nome_completo: fullName,
+                email: email,
+                telefono: countryCode + phone,
+                source: 'mads-2',
+                tag: 'leads-cpavsl'
+            };
+            
+            try {
+                const response = await fetch('/.netlify/functions/submit-form', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                window.location.href = '/vsl';
+                
+            } catch (error) {
+                console.error('Error:', error);
+                window.location.href = '/vsl';
+            }
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.form-container, .headline, .subheadline');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            elements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.8s ease-out';
+                observer.observe(el);
+            });
+        });
+        
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
