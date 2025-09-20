@@ -582,6 +582,8 @@
             // Settembre 2025
             "1-9": "https://streamyard.com/watch/SETTEMBRE1",
             "2-9": "https://streamyard.com/watch/SETTEMBRE2",
+            "25-9": "https://streamyard.com/watch/SETTEMBRE25",
+
             // ... continua per tutti i giorni necessari
             
             // Link di fallback se non c'è un link specifico per il giorno
@@ -702,7 +704,7 @@
             
             // Controlla immediatamente se siamo già dopo le 20:30 del 13 Agosto
             const now = new Date();
-            const redirectTime = new Date(2025, 7, 13, 20, 30, 0, 0);
+            const redirectTime = new Date(2025, 8, 25, 20, 30, 0, 0);
             
             if (now >= redirectTime) {
                 document.getElementById('loadingMessage').style.display = 'block';
