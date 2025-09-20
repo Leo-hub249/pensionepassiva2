@@ -131,12 +131,12 @@ async function saveToGoogleSheets(data) {
     // ===== MODIFICA IMPORTANTE: SOLO FONTI MAPPATE =====
     // Mappa delle fonti - SOLO queste verranno tracciate, tutto il resto sarà "Direct"
     const sourceMap = {
-      'mads-2': 'MADS',
-      'tg2': 'TG',
-      'igs2': 'IGS',
-      'igb2': 'IGB',
-      'tt2': 'TT',
-      'mail2': 'MAIL'
+      'mads-3': 'MADS',
+      'tg-3': 'TG',
+      'igs-3': 'IGS',
+      'igb-3': 'IGB',
+      'tt-3': 'TT',
+      'mail-3': 'MAIL'
       // Aggiungi qui SOLO i percorsi che vuoi tracciare esplicitamente
       // Ad esempio:
       // 'altropercorso': 'AltroNome',
