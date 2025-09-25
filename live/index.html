@@ -545,63 +545,8 @@
     </main>
     
     <script>
-        // Database dei link StreamYard per ogni giorno
-        // IMPORTANTE: Aggiungi qui i tuoi link per ogni giorno del mese
-        const streamyardLinks = {
-            // Formato: "GIORNO-MESE": "LINK_STREAMYARD"
-            // Agosto 2025
-            "4-8": "https://streamyard.com/watch/M3xytBiQyg4t",
-            "5-8": "https://streamyard.com/watch/vR2ceQpnvzTE",
-            "6-8": "https://streamyard.com/watch/4sEE8ggh6kWr",
-            "7-8": "https://streamyard.com/watch/ra98vab5ithA",
-            "8-8": "https://streamyard.com/watch/AyAPBDr8KjVR",
-            "9-8": " ",
-            "10-8": " ",
-            "11-8": "https://streamyard.com/watch/BdcermNVHB3f",
-            "12-8": "https://streamyard.com/watch/w4Z4q2GHYEvZ",
-            "13-8": "https://streamyard.com/watch/dFiyxqnEi2HR",
-            "14-8": "https://streamyard.com/watch/dHUsKgB8qFnH",
-            "15-8": "https://streamyard.com/watch/kGM8xHT7XHvE",
-            "16-8": "https://streamyard.com/watch/VxwcNiJQgVna",
-            "17-8": "https://streamyard.com/watch/RpmnzVfVurFF",
-            "18-8": "https://streamyard.com/watch/A2QRzjbDNtpp",
-            "19-8": "https://streamyard.com/watch/LLLLLLLLL",
-            "20-8": "https://streamyard.com/watch/MMMMMMMMM",
-            "21-8": "https://streamyard.com/watch/NNNNNNNNN",
-            "22-8": "https://streamyard.com/watch/OOOOOOOOO",
-            "23-8": "https://streamyard.com/watch/PPPPPPPPP",
-            "24-8": "https://streamyard.com/watch/QQQQQQQQQ",
-            "25-8": "https://streamyard.com/watch/RRRRRRRRR",
-            "26-8": "https://streamyard.com/watch/SSSSSSSSS",
-            "27-8": "https://streamyard.com/watch/TTTTTTTTT",
-            "28-8": "https://streamyard.com/watch/UUUUUUUUU",
-            "29-8": "https://streamyard.com/watch/VVVVVVVVV",
-            "30-8": "https://streamyard.com/watch/WWWWWWWWW",
-            "31-8": "https://streamyard.com/watch/XXXXXXXXX",
-            
-            // Settembre 2025
-            "1-9": "https://streamyard.com/watch/SETTEMBRE1",
-            "2-9": "https://streamyard.com/watch/SETTEMBRE2",
-            "25-9": "https://streamyard.com/watch/SETTEMBRE25",
-
-            // ... continua per tutti i giorni necessari
-            
-            // Link di fallback se non c'è un link specifico per il giorno
-            "default": "https://streamyard.com/watch/DEFAULT_LINK"
-        };
-        
-        // ===== DATA FISSA PER TEST - 13 AGOSTO 2025 =====
-        function getFixedLiveDate() {
-            // Data fissa per il test: 13 Agosto 2025
-            const fixedDate = new Date(2025, 8, 25); // Mese 7 = Agosto (0-indexed)
-            return fixedDate;
-        }
-        
-        // Funzione per ottenere il link StreamYard fisso per il 13 Agosto
-        function getFixedStreamyardLink() {
-            // Link fisso per il 13 Agosto
-            return streamyardLinks["13-8"] || streamyardLinks["default"];
-        }
+        // Link StreamYard per oggi 25 Settembre 2025
+        const STREAMYARD_LINK = "https://streamyard.com/watch/WsT6SsQU4Je6";
         
         // Funzione per formattare la data in italiano
         function formatDateItalian(date) {
@@ -622,9 +567,8 @@
         
         // Aggiorna la data nel badge
         function updateLiveDate() {
-            // Usa la data fissa
-            const liveDate = getFixedLiveDate();
-            const dateInfo = formatDateItalian(liveDate);
+            const today = new Date();
+            const dateInfo = formatDateItalian(today);
             
             const liveDateElement = document.getElementById('live-date');
             if (liveDateElement) {
@@ -634,47 +578,55 @@
         
         // Countdown e redirect
         function initCountdown() {
-            // Target time fisso: 13 Agosto 2025 alle 21:00
-            const targetTime = new Date(2025, 8, 25, 21, 0, 0, 0);
+            // Ottieni la data di oggi
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
             
-            // Redirect time fisso: 13 Agosto 2025 alle 20:30
-            const redirectTime = new Date(2025, 8, 25, 20, 30, 0, 0);
+            // Imposta gli orari per oggi
+            const targetTime = new Date(today);
+            targetTime.setHours(21, 0, 0, 0); // Live alle 21:00
+            
+            const redirectTime = new Date(today);
+            redirectTime.setHours(20, 30, 0, 0); // Redirect alle 20:30
             
             let hasRedirected = false;
             
-            function updateCountdown() {
-                const now = new Date();
-                const timeRemaining = targetTime - now;
-                
-                // Se sono le 20:30 del 13 Agosto o dopo, fai il redirect
-                if (now >= redirectTime && !hasRedirected) {
+            function performRedirect() {
+                if (!hasRedirected) {
                     hasRedirected = true;
                     document.getElementById('loadingMessage').style.display = 'block';
                     
-                    // Ottieni il link fisso del 13 Agosto e fai il redirect
-                    const fixedLink = getFixedStreamyardLink();
-                    setTimeout(() => {
-                        window.location.href = fixedLink;
-                    }, 2000); // Aspetta 2 secondi per mostrare il messaggio di caricamento
+                    // Track evento di redirect con Facebook Pixel
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'InitiateCheckout');
+                    }
                     
+                    setTimeout(() => {
+                        window.location.href = STREAMYARD_LINK;
+                    }, 2000);
+                }
+            }
+            
+            function updateCountdown() {
+                const currentTime = new Date();
+                const timeRemaining = targetTime - currentTime;
+                
+                // Se sono le 20:30 o dopo, fai il redirect
+                if (currentTime >= redirectTime && !hasRedirected) {
+                    performRedirect();
                     return;
                 }
                 
-                // Se il countdown è finito (21:00 del 13 Agosto)
+                // Se il countdown è finito (dopo le 21:00)
                 if (timeRemaining <= 0) {
                     document.getElementById('days').textContent = '00';
                     document.getElementById('hours').textContent = '00';
                     document.getElementById('minutes').textContent = '00';
                     document.getElementById('seconds').textContent = '00';
                     
-                    // Se siamo dopo le 21:00 del 13 Agosto, fai comunque il redirect
-                    if (!hasRedirected && now >= targetTime) {
-                        hasRedirected = true;
-                        document.getElementById('loadingMessage').style.display = 'block';
-                        const fixedLink = getFixedStreamyardLink();
-                        setTimeout(() => {
-                            window.location.href = fixedLink;
-                        }, 2000);
+                    // Se siamo dopo le 21:00, fai comunque il redirect
+                    if (!hasRedirected) {
+                        performRedirect();
                     }
                     
                     return;
@@ -702,15 +654,22 @@
             updateLiveDate();
             initCountdown();
             
-            // Controlla immediatamente se siamo già dopo le 20:30 del 13 Agosto
+            // Controlla immediatamente se siamo già dopo le 20:30
             const now = new Date();
-            const redirectTime = new Date(2025, 8, 25, 20, 30, 0, 0);
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const redirectTime = new Date(today);
+            redirectTime.setHours(20, 30, 0, 0);
             
             if (now >= redirectTime) {
                 document.getElementById('loadingMessage').style.display = 'block';
-                const fixedLink = getFixedStreamyardLink();
+                
+                // Track evento immediato
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'InitiateCheckout');
+                }
+                
                 setTimeout(() => {
-                    window.location.href = fixedLink;
+                    window.location.href = STREAMYARD_LINK;
                 }, 2000);
             }
         });
